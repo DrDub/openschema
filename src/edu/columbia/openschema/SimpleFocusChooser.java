@@ -52,7 +52,7 @@ import edu.columbia.fuf.FD;
  * text is expected to be.
  *
  * @author Pablo Ariel Duboue (pablo@cs.columbia.edu)
- * @version $Revision: 1.1 $, $Date: 2004/07/12 09:34:07 $
+ * @version $Revision: 1.1.1.1 $, $Date: 2004/07/12 09:34:07 $
  */
 
 

@@ -28,7 +28,7 @@ import com.hp.hpl.jena.rdf.model.*;
  * scripts/text-to-rdf.sh.
  *
  * @author Pablo Ariel Duboue (pablo@cs.columbia.edu)
- * @version $Revision: 1.1 $, $Date: 2004/07/12 09:34:02 $
+ * @version $Revision: 1.1.1.1 $, $Date: 2004/07/12 09:34:02 $
  */
 
 public class TextToRDF{

@@ -44,7 +44,7 @@ import com.hp.hpl.jena.rdf.model.Property;
  * Schema (rdfs) file.
  *
  * @author Pablo Ariel Duboue (pablo@cs.columbia.edu)
- * @version $Revision: 1.1 $, $Date: 2004/07/12 09:34:06 $
+ * @version $Revision: 1.1.1.1 $, $Date: 2004/07/12 09:34:06 $
  */
 
 public class RDFOntology implements Ontology{

@@ -26,7 +26,7 @@ package edu.columbia.openschema;
  * concept is in a separate class.
  *
  * @author Pablo Ariel Duboue (pablo@cs.columbia.edu)
- * @version $Revision: 1.1 $, $Date: 2004/07/12 09:34:07 $
+ * @version $Revision: 1.1.1.1 $, $Date: 2004/07/12 09:34:07 $
  */
 
 public class EmptyOntology implements Ontology{

@@ -23,7 +23,7 @@ import com.sun.xml.bind.DatatypeConverterImpl;
  * also creates the GrammarInfoFacade that unifies all of the grammar
  * info from packages on the contextPath.
  *
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.1.1.1 $
  */
 public class DefaultJAXBContextImpl extends JAXBContext {
     

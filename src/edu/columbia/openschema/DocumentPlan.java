@@ -33,7 +33,7 @@ import edu.columbia.fuf.FD;
  * list of clauses.
  *
  * @author Pablo Ariel Duboue (pablo@cs.columbia.edu)
- * @version $Revision: 1.1 $, $Date: 2004/07/12 09:34:04 $
+ * @version $Revision: 1.1.1.1 $, $Date: 2004/07/12 09:34:04 $
  */
 
 public class DocumentPlan{

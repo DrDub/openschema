@@ -42,7 +42,7 @@ import com.hp.hpl.jena.rdf.model.Property;
  * A RDF-based implementation of the interface <tt>FrameSet</tt>.
  *
  * @author Pablo Ariel Duboue (pablo@cs.columbia.edu)
- * @version $Revision: 1.1 $, $Date: 2004/07/12 09:34:06 $
+ * @version $Revision: 1.1.1.1 $, $Date: 2004/07/12 09:34:06 $
  */
 
 public class RDFFrameSet implements FrameSet{
