@@ -32,7 +32,7 @@ import edu.columbia.fuf.FD;
  * schema instantiation process.
  *
  * @author Pablo Ariel Duboue (pablo@cs.columbia.edu)
- * @version $Revision: 1.1 $, $Date: 2004/07/12 09:34:06 $
+ * @version $Revision: 1.2 $, $Date: 2004/07/12 09:38:35 $
  */
 
 public abstract class LocalChooser{
@@ -54,7 +54,7 @@ public abstract class LocalChooser{
                 result.addAll(extractPotentialFoci((FD)value,frames));
             else if(value instanceof Frame)
                 result.add(value);
-            else if(value!frames.getFrame(value.toString())!=null)
+            else if(value!=null&&frames.getFrame(value.toString())!=null)
                 result.add(frames.getFrame(value.toString()));
         }
         return result;
