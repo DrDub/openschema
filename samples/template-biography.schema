@@ -1,0 +1,363 @@
+
+predicate pred-person
+  variables
+    req def person : c-person 
+    occupation : c-occupation
+  properties  ; properties that the variables have to hold
+    occupation == person.occupation
+  output
+    template "@name-first. @name-last. is a @occupation.. "
+    name-first    person.name.first-name
+    name-last     person.name.last-name
+    occupation    occupation.#TYPE
+    ; preds
+    pred attributive
+    pred0 person 
+    pred1 occupation
+
+predicate pred-birth
+  variables
+    req def person : c-person
+    birth-event : c-birth-event
+  properties  
+    birth-event == person.birth
+  output
+    template "@name-first. @name-last. was born in @date-month./@date-day./@date-year. at @place-city., @place-state., @place-country.. "
+    name-first    person.name.first-name
+    name-last     person.name.last-name
+    date-day      birth-event.date-instant.day
+    date-month    birth-event.date-instant.month
+    date-year     birth-event.date-instant.year
+    place-city    birth-event.place.city
+    place-state   birth-event.place.state
+    place-country birth-event.place.country
+    ; preds
+    pred c-birth
+    pred0 person
+    mods
+      time 
+        instant birth-event.date-instant
+      place     birth-event.place
+
+predicate pred-alias
+  variables
+    req def person : c-person
+    alias : c-name
+  properties  
+    alias == person.alias
+  output
+    template "@name-first. @name-last. is also known as @alias-full.@alias-first. @alias-last.. "
+    name-first    person.name.first-name
+    name-last     person.name.last-name
+    alias-full    alias.full-name
+    alias-first   alias.first-name
+    alias-last    alias.last-name
+    ; preds
+    pred attributive
+    pred0 person
+    pred1
+      pred c-alias
+      pred0 alias
+
+predicate pred-mother
+  variables
+    req self : c-person
+    def parent : c-person
+  properties
+    parent == self.birth.mother
+  output
+    template "@parent-first. @parent-last. is the mother of @name-first. @name-last.. "
+    name-first    self.name.first-name
+    name-last     self.name.last-name
+    parent-first   parent.name.first-name
+    parent-last    parent.name.last-name
+    ; preds
+    pred attributive
+    pred0 parent
+    pred1
+      pred restrictive
+      pred0 c-mother
+      pred1 self
+
+predicate pred-father
+  variables
+    req self : c-person
+    def parent : c-person
+  properties
+    parent == self.birth.father
+  output
+    template "@parent-first. @parent-last. is the father of @name-first. @name-last.. "
+    name-first    self.name.first-name
+    name-last     self.name.last-name
+    parent-first   parent.name.first-name
+    parent-last    parent.name.last-name
+    ; preds
+    pred attributive
+    pred0 parent
+    pred1
+      pred restrictive
+      pred0 c-father
+      pred1 self
+
+predicate pred-education
+  variables
+    req def person : c-person
+    education-event : c-education-event
+  properties
+    education-event == person.education
+  output
+    template "@name-first. @name-last. studied @subject-matter. in @teaching-agent.. "
+    name-first      person.name.first-name
+    name-last       person.name.last-name
+    subject-matter  education-event.subject-matter.canned-text
+    teaching-agent  education-event.teaching-agent.name.name
+    ; preds
+    pred education
+    pred0 person
+    pred1 education-event.teaching-agent
+    pred2 education-event.subject-matter
+    mods
+      time 
+        start   education-event.date-start
+        end     education-event.date-end
+        instant education-event.date-instant
+      place education-event.place
+      reason    education-event.reason
+
+predicate pred-built
+  variables
+    req def person : c-person
+    built-event : c-built-event
+    built : Class
+  properties
+    built-event == person.work-event
+    built == built-event.built
+  output
+    template "@name-first. @name-last. participated in the making of @built-name.. "
+    name-first      person.name.first-name
+    name-last       person.name.last-name
+    built-name      built.name.full
+    ; preds
+    pred c-built
+    pred0 person
+    pred1 built
+    mods
+      time 
+        start   built-event.date-start
+        end     built-event.date-end
+        instant built-event.date-instant
+      place built-event.place
+      reason    built-event.reason
+
+predicate pred-appraisal
+  variables
+    req def reason : Class
+    prize-event : c-received-prize
+  properties
+    prize-event.reason == reason
+  output
+    template "@reason-name. gave @name-first. @name-last. an @prize-title. @prize-subtitle. from @awarder.. "
+    name-first      prize-event.awardee.name.first-name
+    name-last       prize-event.awardee.name.last-name
+    prize-title     prize-event.award.title
+    prize-subtitle  prize-event.award.sub-title
+    awarder         prize-event.awarder.name.full
+    reason-name     reason.name.full
+    ; preds
+    pred c-received-prize
+    pred0 prize-event.awardee
+    pred1 prize-event.awarder
+    pred2 prize-event.award
+    mods
+      time 
+        start   prize-event.date-start
+        end     prize-event.date-end
+        instant prize-event.date-instant
+      place prize-event.place
+      reason    prize-event.reason
+
+predicate pred-other-work-event
+  variables
+    req person : c-person
+    def work-event : c-work-event
+  properties
+    work-event == person.work-event
+    work-event !UNDER c-built-event
+    work-event !UNDER c-received-prize
+  output
+    template "@name-first. @name-last. also @event-type.. "
+    name-first      person.name.first-name
+    name-last       person.name.last-name
+    event-type      work-event.#TYPE
+    ; preds    
+    pred c-event
+    pred0 person
+    pred1 work-event
+    mods
+      time 
+        start   work-event.date-start
+        end     work-event.date-end
+        instant work-event.date-instant
+      place work-event.place
+      reason    work-event.reason
+
+
+predicate pred-relationship
+  variables
+    req def self : c-person
+    partner : c-person
+    relationship : c-relationship
+  properties
+    relationship == self.significant-other
+    partner == relationship.significant-other
+  output
+    template "@name-first. @name-last. @relationship-type. to @partner-first. @partner-last.. "
+    name-first      self.name.first-name
+    name-last       self.name.last-name
+    partner-first   partner.name.first-name
+    partner-last    partner.name.last-name
+    relationship-type relationship.#TYPE
+    ; preds    
+    pred c-ascription
+    pred0 relationship
+    pred1 self
+    pred2 partner
+
+predicate pred-child-mother
+  variables
+    req father : c-person
+    req def mother : c-person
+    child : c-person
+  properties
+    father == child.birth.father
+    mother == child.birth.mother
+  output
+    template "@mother-first. @mother-last. is the mother of his child, @name-first. @name-last.. "
+    name-first      child.name.first-name
+    name-last       child.name.last-name
+    father-first    father.name.first-name
+    father-last     father.name.last-name
+    mother-first    mother.name.first-name
+    mother-last     mother.name.last-name
+    ; preds
+    pred c-ascription
+    pred0 c-child
+    pred1 child
+    pred2
+      pred c-conjunction
+      0 father
+      1 mother
+    
+predicate pred-child-father
+  variables
+    req def father : c-person
+    req mother : c-person
+    def child : c-person
+  properties
+    father == child.birth.father
+    mother == child.birth.mother
+  output
+    template "@father-first. @father-last. is the father of her child, @name-first. @name-last.. "
+    name-first      child.name.first-name
+    name-last       child.name.last-name
+    father-first    father.name.first-name
+    father-last     father.name.last-name
+    mother-first    mother.name.first-name
+    mother-last     mother.name.last-name
+    ; preds
+    pred c-ascription
+    pred0 c-child
+    pred1 child
+    pred2
+      pred c-conjunction
+      0 father
+      1 mother
+    
+predicate pred-relative
+  variables
+    req self : c-person
+    relative : c-person
+    def relation : c-relative
+  properties
+    relation == self.family
+    relative == relation.relative
+    relation !UNDER c-child-relative
+    relation !UNDER c-parent-relative
+  output
+    template "The @relation-type. of @name-first. @name-last. is @relative-fist. @relative-last.. "
+    name-first      self.name.first-name
+    name-last       self.name.last-name
+    relative-first  relative.name.first-name
+    relative-last   relative.name.last-name
+    relation-type   relation.#TYPE    
+    ; preds
+    pred c-ascription
+    pred0 relation
+    pred1 self
+    pred2 relative
+
+predicate pred-death
+  variables
+    req def person : c-person
+    death-event : c-death-event
+  properties
+    death-event == person.death
+  output
+    pred c-dead
+    pred0 person
+    mods
+      time 
+        instant birth-event.date-instant
+      place     birth-event.place
+
+
+; schema starts here
+
+schema biography(self: c-person)  
+  ; name of the schema 'biography'
+  ; self is the person the bio is about, required
+
+  ; first paragraph, the person
+  plus
+    pred-person(person|self)
+  optional
+    pred-birth(person|self)
+  star ; zero or more aliases
+    pred-alias(person|self)
+  star ; zero or more parents
+    choice
+      pred-father(self|self,parent|parent)
+      pred-mother(self|self,parent|parent)
+    star
+      pred-person(person|parent)
+  star ; zero or more education
+    pred-education(person|self)
+  paragraph-boundary
+
+  ; second paragraph, work-life
+  star ; zero or more work achievements
+    pred-built(person|self,built|built)
+    star ; zero or more prizes
+      pred-appraisal(reason|built)
+  star ; zero or more work events
+    pred-other-work-event(person|self)
+  paragraph-boundary
+  
+  ; third paragraph, love life
+  star ; zero or more relationships
+    pred-relationship(self|self,partner|partner)
+    star ; zero or more children
+      choice
+          pred-child-mother(father|self,mother|partner,child|child)
+          pred-child-father(father|partner,mother|self,child|child)
+      star
+        pred-person(person|child)
+  paragraph-boundary
+  
+  ; fourth paragraph, relatives and closing
+  star ; zero or more relatives
+    pred-relative(self|self,relative|relative)
+    star
+      pred-person(person|relative)
+  optional
+    pred-death(person|self)    

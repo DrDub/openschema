@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="iso-latin-1" standalone="yes"?>
+<OpenSchema 
+  xmlns="http://openschema.sf.net"
+  xmlns:fd="http://jfuf.sf.net/FD">
+<Predicate ID="attributive">
+<Variable ID="object" Type="c-entity" Required="true" DefaultFocus="false"/>
+<Variable ID="attribute" Type="c-entity" Required="false" DefaultFocus="true"/>
+<Property Value="attribute == object.has-a"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@object-name. has a @attribute-name.. "</fd:G></fd:V>
+<fd:V N="object-name"><fd:G>object.name</fd:G></fd:V>
+<fd:V N="attribute-name"><fd:G>attribute.name</fd:G></fd:V>
+<fd:V N="object"><fd:G>object</fd:G></fd:V>
+<fd:V N="attribute"><fd:G>attribute</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="amplification">
+<Variable ID="object" Type="c-entity" Required="true" DefaultFocus="false"/>
+<Variable ID="attribute" Type="c-entity" Required="true" DefaultFocus="true"/>
+<Variable ID="amplification-pred" Type="c-amplification-predicate" Required="false" DefaultFocus="false"/>
+<Property Value="attribute == object.has-a"/>
+<Property Value="object == amplification-pred.object"/>
+<Property Value="attribute == amplification-pred.attribute"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@canned-text. "</fd:G></fd:V>
+<fd:V N="object"><fd:G>object</fd:G></fd:V>
+<fd:V N="attribute"><fd:G>attribute</fd:G></fd:V>
+<fd:V N="canned-text"><fd:G>amplification-pred.canned-text</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="particular-illustration">
+<Variable ID="object" Type="c-entity" Required="true" DefaultFocus="false"/>
+<Variable ID="attribute" Type="c-entity" Required="true" DefaultFocus="true"/>
+<Variable ID="illustration-pred" Type="c-illustration-predicate" Required="false" DefaultFocus="false"/>
+<Property Value="attribute == object.has-a"/>
+<Property Value="object == illustration-pred.object"/>
+<Property Value="attribute == illustration-pred.attribute"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@canned-text. "</fd:G></fd:V>
+<fd:V N="object"><fd:G>object</fd:G></fd:V>
+<fd:V N="attribute"><fd:G>attribute</fd:G></fd:V>
+<fd:V N="canned-text"><fd:G>illustration-pred.canned-text</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="classification">
+<Variable ID="object" Type="c-entity" Required="true" DefaultFocus="true"/>
+<Variable ID="classification-pred" Type="c-classification-predicate" Required="false" DefaultFocus="false"/>
+<Property Value="object == classification-pred.object"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@canned-text. "</fd:G></fd:V>
+<fd:V N="object"><fd:G>object</fd:G></fd:V>
+<fd:V N="canned-text"><fd:G>classification-pred.canned-text</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="analogy">
+<Variable ID="object" Type="c-entity" Required="true" DefaultFocus="true"/>
+<Variable ID="analogy-pred" Type="c-analogy-predicate" Required="false" DefaultFocus="false"/>
+<Property Value="object == analogy-pred.object"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@canned-text. "</fd:G></fd:V>
+<fd:V N="object"><fd:G>object</fd:G></fd:V>
+<fd:V N="canned-text"><fd:G>analogy-pred.canned-text</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="explanation">
+<Variable ID="object" Type="c-entity" Required="true" DefaultFocus="true"/>
+<Variable ID="issue" Type="c-predicate" Required="false" DefaultFocus="false"/>
+<Variable ID="explanation-pred" Type="c-explanation-predicate" Required="false" DefaultFocus="false"/>
+<Property Value="object == explanation-pred.object"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@canned-text. "</fd:G></fd:V>
+<fd:V N="object"><fd:G>object</fd:G></fd:V>
+<fd:V N="issue"><fd:G>issue</fd:G></fd:V>
+<fd:V N="canned-text"><fd:G>explanation-pred.canned-text</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Schema>
+<Node><Predicate Name="attributive">
+<Variable Name="entity" Value="object"/>
+</Predicate></Node>
+<Node><Predicate Name="amplification">
+<Variable Name="entity" Value="object"/>
+</Predicate></Node>
+<Node><KleeneStar>
+<Node><Predicate Name="particular-illustration">
+<Variable Name="entity" Value="object"/>
+<Variable Name="attribute" Value="attribute"/>
+</Predicate></Node>
+</KleeneStar></Node>
+<Node><Optional>
+<Node><Predicate Name="classification">
+<Variable Name="entity" Value="object"/>
+<Variable Name="attribute" Value="attribute"/>
+</Predicate></Node>
+</Optional></Node>
+<Node><Predicate Name="analogy">
+<Variable Name="entity" Value="object"/>
+<Variable Name="analogy-pred" Value="analogy"/>
+</Predicate></Node>
+<Node><Choice>
+<Node><Predicate Name="explanation">
+<Variable Name="entity" Value="object"/>
+<Variable Name="issue" Value="analogy"/>
+</Predicate></Node>
+</Choice></Node>
+</Schema>
+</OpenSchema>

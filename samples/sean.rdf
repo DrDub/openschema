@@ -1,0 +1,405 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://local/" >
+  <rdf:Description rdf:about="http://local/agency-organization-1">
+    <j.0:TYPE>c-agency-organization</j.0:TYPE>
+    <j.0:name rdf:resource="http://local/name-9"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/grandson-relative-1">
+    <j.0:relative rdf:resource="http://local/person-27"/>
+    <j.0:TYPE>c-grandson-relative</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-12">
+    <j.0:TYPE>c-date</j.0:TYPE>
+    <j.0:year>1993</j.0:year>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/award-12">
+    <j.0:TYPE>c-award</j.0:TYPE>
+    <j.0:sub-title>"Best Supporting Actor"</j.0:sub-title>
+    <j.0:title>"National Board of Review"</j.0:title>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/person-27">
+    <j.0:TYPE>c-person</j.0:TYPE>
+    <j.0:name rdf:resource="http://local/name-6"/>
+    <j.0:birth rdf:resource="http://local/birth-event-3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/canned-quote-1">
+    <j.0:TYPE>c-canned-quote</j.0:TYPE>
+    <j.0:canned-text>""I would drink Sean Connery's bath water." "</j.0:canned-text>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-3">
+    <j.0:TYPE>c-name</j.0:TYPE>
+    <j.0:first-name>"James"</j.0:first-name>
+    <j.0:last-name>"Bond"</j.0:last-name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/mother-relative-1">
+    <j.0:relative rdf:resource="http://local/person-5"/>
+    <j.0:TYPE>c-mother-relative</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/received-prize-2">
+    <j.0:date-instant rdf:resource="http://local/date-2"/>
+    <j.0:reason rdf:resource="http://local/film-2"/>
+    <j.0:award rdf:resource="http://local/award-2"/>
+    <j.0:awardee rdf:resource="http://local/person-1"/>
+    <j.0:TYPE>c-received-prize</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/film-made-2">
+    <j.0:builder rdf:resource="http://local/person-1"/>
+    <j.0:TYPE>c-film-made</j.0:TYPE>
+    <j.0:built rdf:resource="http://local/film-2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-11">
+    <j.0:year>1971</j.0:year>
+    <j.0:TYPE>c-date</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/college-1">
+    <j.0:TYPE>c-college</j.0:TYPE>
+    <j.0:name rdf:resource="http://local/name-13"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/wn-director-3-1">
+    <j.0:TYPE>c-wn-director-3</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-4">
+    <j.0:first-name>"Jason"</j.0:first-name>
+    <j.0:last-name>"Joseph Connery"</j.0:last-name>
+    <j.0:TYPE>c-name</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-10">
+    <j.0:first-name>"Thomas"</j.0:first-name>
+    <j.0:TYPE>c-name</j.0:TYPE>
+    <j.0:last-name>"Sean Connery"</j.0:last-name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/wn-mannequin-1-1">
+    <j.0:TYPE>c-wn-mannequin-1</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-7">
+    <j.0:TYPE>c-date</j.0:TYPE>
+    <j.0:year>1998</j.0:year>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-1">
+    <j.0:first-name>"Diane"</j.0:first-name>
+    <j.0:TYPE>c-name</j.0:TYPE>
+    <j.0:last-name>"Cilento"</j.0:last-name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/wife-1">
+    <j.0:significant-other rdf:resource="http://local/person-2"/>
+    <j.0:TYPE>c-wife</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-10">
+    <j.0:TYPE>c-date</j.0:TYPE>
+    <j.0:year>1990</j.0:year>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-7">
+    <j.0:TYPE>c-name</j.0:TYPE>
+    <j.0:first-name>"Micheline"</j.0:first-name>
+    <j.0:last-name>"Roquebrune"</j.0:last-name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/person-53">
+    <j.0:name rdf:resource="http://local/name-14"/>
+    <j.0:occupation rdf:resource="http://local/wn-driver-1-1"/>
+    <j.0:TYPE>c-person</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/person-28">
+    <j.0:name rdf:resource="http://local/name-7"/>
+    <j.0:TYPE>c-person</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/father-relative-1">
+    <j.0:relative rdf:resource="http://local/person-53"/>
+    <j.0:TYPE>c-father-relative</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/film-2">
+    <j.0:TYPE>c-film</j.0:TYPE>
+    <j.0:name rdf:resource="http://local/name-23"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/join-organization-event-1">
+    <j.0:adjoiner rdf:resource="http://local/person-1"/>
+    <j.0:TYPE>c-join-organization-event</j.0:TYPE>
+    <j.0:adjoint rdf:resource="http://local/agency-organization-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-4">
+    <j.0:year>1998</j.0:year>
+    <j.0:TYPE>c-date</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/received-prize-3">
+    <j.0:awardee rdf:resource="http://local/person-1"/>
+    <j.0:TYPE>c-received-prize</j.0:TYPE>
+    <j.0:award rdf:resource="http://local/award-3"/>
+    <j.0:reason rdf:resource="http://local/film-1"/>
+    <j.0:date-instant rdf:resource="http://local/date-3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-22">
+    <j.0:full>""The Untouchables""</j.0:full>
+    <j.0:TYPE>c-name</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-1">
+    <j.0:year>1999</j.0:year>
+    <j.0:TYPE>c-date</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/place-1">
+    <j.0:city>"Edinburgh"</j.0:city>
+    <j.0:country>"Scotland"</j.0:country>
+    <j.0:TYPE>c-place</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/film-made-1">
+    <j.0:builder rdf:resource="http://local/person-1"/>
+    <j.0:TYPE>c-film-made</j.0:TYPE>
+    <j.0:built rdf:resource="http://local/film-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-12">
+    <j.0:TYPE>c-name</j.0:TYPE>
+    <j.0:name>"director Sidney Lumet</j.0:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-14">
+    <j.0:year>1998</j.0:year>
+    <j.0:TYPE>c-date</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-5">
+    <j.0:TYPE>c-name</j.0:TYPE>
+    <j.0:name>"Whoopi Goldberg</j.0:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/person-2">
+    <j.0:name rdf:resource="http://local/name-1"/>
+    <j.0:TYPE>c-person</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/award-9">
+    <j.0:sub-title>"Career Achievement"</j.0:sub-title>
+    <j.0:title>"National Board of Review"</j.0:title>
+    <j.0:TYPE>c-award</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-11">
+    <j.0:TYPE>c-name</j.0:TYPE>
+    <j.0:given-name>"Sean"</j.0:given-name>
+    <j.0:last-name>"Connery"</j.0:last-name>
+    <j.0:first-name>"Neil"</j.0:first-name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/wn-actor-1-1">
+    <j.0:TYPE>c-wn-actor-1</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/award-3">
+    <j.0:TYPE>c-award</j.0:TYPE>
+    <j.0:title>"Golden Globe"</j.0:title>
+    <j.0:sub-title>"Best Supporting Actor"</j.0:sub-title>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/person-43">
+    <j.0:TYPE>c-person</j.0:TYPE>
+    <j.0:name rdf:resource="http://local/name-11"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/person-1">
+    <j.0:significant-other rdf:resource="http://local/wife-2"/>
+    <j.0:occupation rdf:resource="http://local/wn-mannequin-1-1"/>
+    <j.0:work-event rdf:resource="http://local/received-prize-3"/>
+    <j.0:work-event rdf:resource="http://local/received-prize-2"/>
+    <j.0:occupation rdf:resource="http://local/wn-producer-2-1"/>
+    <j.0:family rdf:resource="http://local/son-relative-1"/>
+    <j.0:work-event rdf:resource="http://local/communication-event-1"/>
+    <j.0:family rdf:resource="http://local/brother-relative-1"/>
+    <j.0:family rdf:resource="http://local/grandson-relative-1"/>
+    <j.0:family rdf:resource="http://local/mother-relative-1"/>
+    <j.0:work-event rdf:resource="http://local/film-made-1"/>
+    <j.0:claim-to-fame>canned-claim-to-fame-1</j.0:claim-to-fame>
+    <j.0:education rdf:resource="http://local/education-graduation-1"/>
+    <j.0:occupation rdf:resource="http://local/wn-director-3-1"/>
+    <j.0:work-event rdf:resource="http://local/film-made-2"/>
+    <j.0:education rdf:resource="http://local/canned-education-event-1"/>
+    <j.0:name rdf:resource="http://local/name-8"/>
+    <j.0:occupation rdf:resource="http://local/wn-actor-1-1"/>
+    <j.0:TYPE>c-male</j.0:TYPE>
+    <j.0:family rdf:resource="http://local/father-relative-1"/>
+    <j.0:significant-other rdf:resource="http://local/wife-1"/>
+    <j.0:birth rdf:resource="http://local/birth-event-1"/>
+    <j.0:work-event rdf:resource="http://local/join-organization-event-1"/>
+    <j.0:work-event rdf:resource="http://local/received-prize-14"/>
+    <j.0:alias rdf:resource="http://local/name-3"/>
+    <j.0:work-event rdf:resource="http://local/communication-event-2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/birth-event-2">
+    <j.0:date rdf:resource="http://local/date-6"/>
+    <j.0:TYPE>c-birth-event</j.0:TYPE>
+    <j.0:mother rdf:resource="http://local/person-2"/>
+    <j.0:father rdf:resource="http://local/person-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/person-5">
+    <j.0:name rdf:resource="http://local/name-2"/>
+    <j.0:TYPE>c-person</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-2">
+    <j.0:first-name>"Euphamia"</j.0:first-name>
+    <j.0:TYPE>c-name</j.0:TYPE>
+    <j.0:last-name>"Connery"</j.0:last-name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/news-organization-1">
+    <j.0:TYPE>c-news-organization</j.0:TYPE>
+    <j.0:name rdf:resource="http://local/name-5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/wn-driver-1-1">
+    <j.0:TYPE>c-wn-driver-1</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/award-1">
+    <j.0:title>"ShoWest"</j.0:title>
+    <j.0:TYPE>c-award</j.0:TYPE>
+    <j.0:sub-title>"Lifetime Achievement"</j.0:sub-title>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/canned-education-event-1">
+    <j.0:canned-text>" Dropped out of school at age 13 "</j.0:canned-text>
+    <j.0:TYPE>c-canned-education-event</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/person-19">
+    <j.0:name rdf:resource="http://local/name-4"/>
+    <j.0:TYPE>c-person</j.0:TYPE>
+    <j.0:birth rdf:resource="http://local/birth-event-2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/canned-focus-of-study-1">
+    <j.0:canned-text>"furniture polishing"</j.0:canned-text>
+    <j.0:TYPE>c-canned-focus-of-study</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/canned-quote-2">
+    <j.0:TYPE>c-canned-quote</j.0:TYPE>
+    <j.0:canned-text>""He's...one of the best actors there is</j.0:canned-text>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-8">
+    <j.0:year>1962</j.0:year>
+    <j.0:TYPE>c-date</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-23">
+    <j.0:full>""The Name of the Rose""</j.0:full>
+    <j.0:TYPE>c-name</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/award-2">
+    <j.0:TYPE>c-award</j.0:TYPE>
+    <j.0:sub-title>"Best Actor"</j.0:sub-title>
+    <j.0:title>"BAFTA"</j.0:title>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-9">
+    <j.0:name>""Creative Artists Agency""</j.0:name>
+    <j.0:TYPE>c-name</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-13">
+    <j.0:name>"British Legion training school"</j.0:name>
+    <j.0:TYPE>c-name</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/education-graduation-1">
+    <j.0:subject-matter rdf:resource="http://local/canned-focus-of-study-1"/>
+    <j.0:teaching-agent rdf:resource="http://local/college-1"/>
+    <j.0:TYPE>c-education-graduation</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/brother-relative-1">
+    <j.0:younger>"yes"</j.0:younger>
+    <j.0:TYPE>c-brother-relative</j.0:TYPE>
+    <j.0:relative rdf:resource="http://local/person-43"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/communication-event-2">
+    <j.0:communicator rdf:resource="http://local/person-1"/>
+    <j.0:TYPE>c-communication-event</j.0:TYPE>
+    <j.0:communique rdf:resource="http://local/canned-quote-2"/>
+    <j.0:info-source rdf:resource="http://local/news-organization-2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/canned-factoid-1">
+    <j.0:canned-text>"shared award; Connery was one of the producers"</j.0:canned-text>
+    <j.0:TYPE>c-canned-factoid</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/received-prize-14">
+    <j.0:TYPE>c-received-prize</j.0:TYPE>
+    <j.0:awardee rdf:resource="http://local/person-1"/>
+    <j.0:award rdf:resource="http://local/award-14"/>
+    <j.0:date-instant rdf:resource="http://local/date-18"/>
+    <j.0:reason rdf:resource="http://local/film-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/birth-event-1">
+    <j.0:father rdf:resource="http://local/person-53"/>
+    <j.0:name rdf:resource="http://local/name-10"/>
+    <j.0:place rdf:resource="http://local/place-1"/>
+    <j.0:TYPE>c-birth-event</j.0:TYPE>
+    <j.0:mother rdf:resource="http://local/person-5"/>
+    <j.0:date-instant rdf:resource="http://local/date-16"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-6">
+    <j.0:month>"January"</j.0:month>
+    <j.0:TYPE>c-date</j.0:TYPE>
+    <j.0:year>1963</j.0:year>
+    <j.0:day>11</j.0:day>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/birth-event-3">
+    <j.0:TYPE>c-birth-event</j.0:TYPE>
+    <j.0:date rdf:resource="http://local/date-9"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-13">
+    <j.0:TYPE>c-date</j.0:TYPE>
+    <j.0:year>1996</j.0:year>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/communication-event-1">
+    <j.0:communique rdf:resource="http://local/canned-quote-1"/>
+    <j.0:TYPE>c-communication-event</j.0:TYPE>
+    <j.0:communicator rdf:resource="http://local/person-1"/>
+    <j.0:info-source rdf:resource="http://local/news-organization-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/son-relative-1">
+    <j.0:relative rdf:resource="http://local/person-19"/>
+    <j.0:TYPE>c-son-relative</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-16">
+    <j.0:day>25</j.0:day>
+    <j.0:TYPE>c-date</j.0:TYPE>
+    <j.0:year>1930</j.0:year>
+    <j.0:month>8</j.0:month>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-6">
+    <j.0:TYPE>c-name</j.0:TYPE>
+    <j.0:first-name>"Dashiell"</j.0:first-name>
+    <j.0:last-name>"Quinn Connery"</j.0:last-name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/wife-2">
+    <j.0:TYPE>c-wife</j.0:TYPE>
+    <j.0:significant-other rdf:resource="http://local/person-28"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-9">
+    <j.0:TYPE>c-date</j.0:TYPE>
+    <j.0:year>1997</j.0:year>
+    <j.0:month>"June"</j.0:month>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-15">
+    <j.0:year>1987</j.0:year>
+    <j.0:TYPE>c-date</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/news-organization-2">
+    <j.0:TYPE>c-news-organization</j.0:TYPE>
+    <j.0:name rdf:resource="http://local/name-12"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/wn-producer-2-1">
+    <j.0:TYPE>c-wn-producer-2</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-18">
+    <j.0:year>1987</j.0:year>
+    <j.0:TYPE>c-date</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/film-1">
+    <j.0:TYPE>c-film</j.0:TYPE>
+    <j.0:name rdf:resource="http://local/name-22"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-8">
+    <j.0:last-name>"Connery"</j.0:last-name>
+    <j.0:first-name>"Sean"</j.0:first-name>
+    <j.0:TYPE>c-name</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-17">
+    <j.0:TYPE>c-date</j.0:TYPE>
+    <j.0:year>1997</j.0:year>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-3">
+    <j.0:TYPE>c-date</j.0:TYPE>
+    <j.0:year>1987</j.0:year>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/name-14">
+    <j.0:last-name>"Connery"</j.0:last-name>
+    <j.0:TYPE>c-name</j.0:TYPE>
+    <j.0:first-name>"Joseph"</j.0:first-name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/award-14">
+    <j.0:sub-title>"Best Supporting Actor"</j.0:sub-title>
+    <j.0:title>"Oscar"</j.0:title>
+    <j.0:TYPE>c-award</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/date-2">
+    <j.0:TYPE>c-date</j.0:TYPE>
+    <j.0:year>1987</j.0:year>
+  </rdf:Description>
+</rdf:RDF>

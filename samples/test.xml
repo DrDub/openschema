@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OpenSchema xmlns="http://openschema.sf.net" xmlns:fd="http://jfuf.sf.net/FD">
+<Predicate ID="single-predicate">
+<Variable ID="Data" Type="Class" Required="false" DefaultFocus="true"/>
+<Output><fd:FD><fd:V N="template"><fd:G>The object is @obj..</fd:G></fd:V><fd:V N="obj"><fd:G>Data.#TYPE</fd:G></fd:V></fd:FD></Output>
+</Predicate>
+<Schema>
+<Node><KleeneStar><Node><Predicate Name="single-predicate"/></Node></KleeneStar></Node>
+</Schema>
+</OpenSchema>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://jfuf.sf.net/FD"
+    xml:lang="EN"
+    targetNamespace="http://jfuf.sf.net/FD"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+  <xs:element name="FD">
+    <xs:annotation><xs:documentation> 
+      An FD.
+    </xs:documentation></xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="V" type="AttributeValuePair" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="AttributeValuePair">
+    <xs:annotation><xs:documentation> 
+      An attribute-value pair.  It can contain a ground value or a
+      hierarchy of other attribute-value pairs. It has to contain a
+      mandatory name.
+    </xs:documentation></xs:annotation>
+    <xs:choice>
+      <xs:element name="G" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="V" type="AttributeValuePair" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attribute name="N" type="xs:token" use="required">
+      <xs:annotation><xs:documentation>
+        Attribute name for the attribute-value pair.
+      </xs:documentation></xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+</xs:schema>

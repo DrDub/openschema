@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="iso-latin-1" standalone="yes"?>
+<OpenSchema 
+  xmlns="http://openschema.sf.net"
+  xmlns:fd="http://jfuf.sf.net/FD">
+<Predicate ID="pred-person">
+<Variable ID="person" Type="c-person" Required="true" DefaultFocus="true"/>
+<Variable ID="occupation" Type="c-occupation" Required="false" DefaultFocus="false"/>
+<Property Value="occupation == person.occupation"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@name-first. @name-last. is a @occupation.. "</fd:G></fd:V>
+<fd:V N="name-first"><fd:G>person.name.first-name</fd:G></fd:V>
+<fd:V N="name-last"><fd:G>person.name.last-name</fd:G></fd:V>
+<fd:V N="occupation"><fd:G>occupation.#TYPE</fd:G></fd:V>
+<fd:V N="pred"><fd:G>attributive</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>person</fd:G></fd:V>
+<fd:V N="pred1"><fd:G>occupation</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="pred-birth">
+<Variable ID="person" Type="c-person" Required="true" DefaultFocus="true"/>
+<Variable ID="birth-event" Type="c-birth-event" Required="false" DefaultFocus="false"/>
+<Property Value="birth-event == person.birth"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@name-first. @name-last. was born in @date-month./@date-day./@date-year. at @place-city., @place-state., @place-country.. "</fd:G></fd:V>
+<fd:V N="name-first"><fd:G>person.name.first-name</fd:G></fd:V>
+<fd:V N="name-last"><fd:G>person.name.last-name</fd:G></fd:V>
+<fd:V N="date-day"><fd:G>birth-event.date-instant.day</fd:G></fd:V>
+<fd:V N="date-month"><fd:G>birth-event.date-instant.month</fd:G></fd:V>
+<fd:V N="date-year"><fd:G>birth-event.date-instant.year</fd:G></fd:V>
+<fd:V N="place-city"><fd:G>birth-event.place.city</fd:G></fd:V>
+<fd:V N="place-state"><fd:G>birth-event.place.state</fd:G></fd:V>
+<fd:V N="place-country"><fd:G>birth-event.place.country</fd:G></fd:V>
+<fd:V N="pred"><fd:G>c-birth</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>person</fd:G></fd:V>
+<fd:V N="mods">
+<fd:V N="time"><fd:G></fd:G></fd:V>
+<fd:V N="instant"><fd:G>birth-event.date-instant</fd:G></fd:V>
+</fd:V>
+<fd:V N="place"><fd:G>birth-event.place</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="pred-alias">
+<Variable ID="person" Type="c-person" Required="true" DefaultFocus="true"/>
+<Variable ID="alias" Type="c-name" Required="false" DefaultFocus="false"/>
+<Property Value="alias == person.alias"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@name-first. @name-last. is also known as @alias-full.@alias-first. @alias-last.. "</fd:G></fd:V>
+<fd:V N="name-first"><fd:G>person.name.first-name</fd:G></fd:V>
+<fd:V N="name-last"><fd:G>person.name.last-name</fd:G></fd:V>
+<fd:V N="alias-full"><fd:G>alias.full-name</fd:G></fd:V>
+<fd:V N="alias-first"><fd:G>alias.first-name</fd:G></fd:V>
+<fd:V N="alias-last"><fd:G>alias.last-name</fd:G></fd:V>
+<fd:V N="pred"><fd:G>attributive</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>person</fd:G></fd:V>
+<fd:V N="pred1">
+<fd:V N="pred"><fd:G>c-alias</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>alias</fd:G></fd:V>
+</fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="pred-mother">
+<Variable ID="self" Type="c-person" Required="true" DefaultFocus="false"/>
+<Variable ID="parent" Type="c-person" Required="false" DefaultFocus="true"/>
+<Property Value="parent == self.birth.mother"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@parent-first. @parent-last. is the mother of @name-first. @name-last.. "</fd:G></fd:V>
+<fd:V N="name-first"><fd:G>self.name.first-name</fd:G></fd:V>
+<fd:V N="name-last"><fd:G>self.name.last-name</fd:G></fd:V>
+<fd:V N="parent-first"><fd:G>parent.name.first-name</fd:G></fd:V>
+<fd:V N="parent-last"><fd:G>parent.name.last-name</fd:G></fd:V>
+<fd:V N="pred"><fd:G>attributive</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>parent</fd:G></fd:V>
+<fd:V N="pred1">
+<fd:V N="pred"><fd:G>restrictive</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>c-mother</fd:G></fd:V>
+<fd:V N="pred1"><fd:G>self</fd:G></fd:V>
+</fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="pred-father">
+<Variable ID="self" Type="c-person" Required="true" DefaultFocus="false"/>
+<Variable ID="parent" Type="c-person" Required="false" DefaultFocus="true"/>
+<Property Value="parent == self.birth.father"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@parent-first. @parent-last. is the father of @name-first. @name-last.. "</fd:G></fd:V>
+<fd:V N="name-first"><fd:G>self.name.first-name</fd:G></fd:V>
+<fd:V N="name-last"><fd:G>self.name.last-name</fd:G></fd:V>
+<fd:V N="parent-first"><fd:G>parent.name.first-name</fd:G></fd:V>
+<fd:V N="parent-last"><fd:G>parent.name.last-name</fd:G></fd:V>
+<fd:V N="pred"><fd:G>attributive</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>parent</fd:G></fd:V>
+<fd:V N="pred1">
+<fd:V N="pred"><fd:G>restrictive</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>c-father</fd:G></fd:V>
+<fd:V N="pred1"><fd:G>self</fd:G></fd:V>
+</fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="pred-education">
+<Variable ID="person" Type="c-person" Required="true" DefaultFocus="true"/>
+<Variable ID="education-event" Type="c-education-event" Required="false" DefaultFocus="false"/>
+<Property Value="education-event == person.education"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@name-first. @name-last. studied @subject-matter. in @teaching-agent.. "</fd:G></fd:V>
+<fd:V N="name-first"><fd:G>person.name.first-name</fd:G></fd:V>
+<fd:V N="name-last"><fd:G>person.name.last-name</fd:G></fd:V>
+<fd:V N="subject-matter"><fd:G>education-event.subject-matter.canned-text</fd:G></fd:V>
+<fd:V N="teaching-agent"><fd:G>education-event.teaching-agent.name.name</fd:G></fd:V>
+<fd:V N="pred"><fd:G>education</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>person</fd:G></fd:V>
+<fd:V N="pred1"><fd:G>education-event.teaching-agent</fd:G></fd:V>
+<fd:V N="pred2"><fd:G>education-event.subject-matter</fd:G></fd:V>
+<fd:V N="mods">
+<fd:V N="time"><fd:G></fd:G></fd:V>
+<fd:V N="start"><fd:G>education-event.date-start</fd:G></fd:V>
+<fd:V N="end"><fd:G>education-event.date-end</fd:G></fd:V>
+<fd:V N="instant"><fd:G>education-event.date-instant</fd:G></fd:V>
+</fd:V>
+<fd:V N="place"><fd:G>education-event.place</fd:G></fd:V>
+<fd:V N="reason"><fd:G>education-event.reason</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="pred-built">
+<Variable ID="person" Type="c-person" Required="true" DefaultFocus="true"/>
+<Variable ID="built-event" Type="c-built-event" Required="false" DefaultFocus="false"/>
+<Variable ID="built" Type="Class" Required="false" DefaultFocus="false"/>
+<Property Value="built-event == person.work-event"/>
+<Property Value="built == built-event.built"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@name-first. @name-last. participated in the making of @built-name.. "</fd:G></fd:V>
+<fd:V N="name-first"><fd:G>person.name.first-name</fd:G></fd:V>
+<fd:V N="name-last"><fd:G>person.name.last-name</fd:G></fd:V>
+<fd:V N="built-name"><fd:G>built.name.full</fd:G></fd:V>
+<fd:V N="pred"><fd:G>c-built</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>person</fd:G></fd:V>
+<fd:V N="pred1"><fd:G>built</fd:G></fd:V>
+<fd:V N="mods">
+<fd:V N="time"><fd:G></fd:G></fd:V>
+<fd:V N="start"><fd:G>built-event.date-start</fd:G></fd:V>
+<fd:V N="end"><fd:G>built-event.date-end</fd:G></fd:V>
+<fd:V N="instant"><fd:G>built-event.date-instant</fd:G></fd:V>
+</fd:V>
+<fd:V N="place"><fd:G>built-event.place</fd:G></fd:V>
+<fd:V N="reason"><fd:G>built-event.reason</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="pred-appraisal">
+<Variable ID="reason" Type="Class" Required="true" DefaultFocus="true"/>
+<Variable ID="prize-event" Type="c-received-prize" Required="false" DefaultFocus="false"/>
+<Property Value="prize-event.reason == reason"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@name-first. @name-last. received @prize-title. @prize-subtitle. from @awarder. because of @reason-name.. "</fd:G></fd:V>
+<fd:V N="name-first"><fd:G>prize-event.awardee.name.first-name</fd:G></fd:V>
+<fd:V N="name-last"><fd:G>prize-event.awardee.name.last-name</fd:G></fd:V>
+<fd:V N="prize-title"><fd:G>prize-event.award.title</fd:G></fd:V>
+<fd:V N="prize-subtitle"><fd:G>prize-event.award.sub-title</fd:G></fd:V>
+<fd:V N="awarder"><fd:G>prize-event.awarder.name.full</fd:G></fd:V>
+<fd:V N="reason-name"><fd:G>reason.name.full</fd:G></fd:V>
+<fd:V N="pred"><fd:G>c-received-prize</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>prize-event.awardee</fd:G></fd:V>
+<fd:V N="pred1"><fd:G>prize-event.awarder</fd:G></fd:V>
+<fd:V N="pred2"><fd:G>prize-event.award</fd:G></fd:V>
+<fd:V N="mods">
+<fd:V N="time"><fd:G></fd:G></fd:V>
+<fd:V N="start"><fd:G>prize-event.date-start</fd:G></fd:V>
+<fd:V N="end"><fd:G>prize-event.date-end</fd:G></fd:V>
+<fd:V N="instant"><fd:G>prize-event.date-instant</fd:G></fd:V>
+</fd:V>
+<fd:V N="place"><fd:G>prize-event.place</fd:G></fd:V>
+<fd:V N="reason"><fd:G>prize-event.reason</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="pred-other-work-event">
+<Variable ID="person" Type="c-person" Required="true" DefaultFocus="false"/>
+<Variable ID="work-event" Type="c-work-event" Required="false" DefaultFocus="true"/>
+<Property Value="work-event == person.work-event"/>
+<Property Value="work-event !UNDER c-built-event"/>
+<Property Value="work-event !UNDER c-received-prize"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@name-first. @name-last. also @event-type.. "</fd:G></fd:V>
+<fd:V N="name-first"><fd:G>person.name.first-name</fd:G></fd:V>
+<fd:V N="name-last"><fd:G>person.name.last-name</fd:G></fd:V>
+<fd:V N="event-type"><fd:G>work-event.#TYPE</fd:G></fd:V>
+<fd:V N="pred"><fd:G>c-event</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>person</fd:G></fd:V>
+<fd:V N="pred1"><fd:G>work-event</fd:G></fd:V>
+<fd:V N="mods">
+<fd:V N="time"><fd:G></fd:G></fd:V>
+<fd:V N="start"><fd:G>work-event.date-start</fd:G></fd:V>
+<fd:V N="end"><fd:G>work-event.date-end</fd:G></fd:V>
+<fd:V N="instant"><fd:G>work-event.date-instant</fd:G></fd:V>
+</fd:V>
+<fd:V N="place"><fd:G>work-event.place</fd:G></fd:V>
+<fd:V N="reason"><fd:G>work-event.reason</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="pred-relationship">
+<Variable ID="self" Type="c-person" Required="true" DefaultFocus="true"/>
+<Variable ID="partner" Type="c-person" Required="false" DefaultFocus="false"/>
+<Variable ID="relationship" Type="c-relationship" Required="false" DefaultFocus="false"/>
+<Property Value="relationship == self.significant-other"/>
+<Property Value="partner == relationship.significant-other"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@name-first. @name-last. @relationship-type. to @partner-first. @partner-last.. "</fd:G></fd:V>
+<fd:V N="name-first"><fd:G>self.name.first-name</fd:G></fd:V>
+<fd:V N="name-last"><fd:G>self.name.last-name</fd:G></fd:V>
+<fd:V N="partner-first"><fd:G>partner.name.first-name</fd:G></fd:V>
+<fd:V N="partner-last"><fd:G>partner.name.last-name</fd:G></fd:V>
+<fd:V N="relationship-type"><fd:G>relationship.#TYPE</fd:G></fd:V>
+<fd:V N="pred"><fd:G>c-ascription</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>relationship</fd:G></fd:V>
+<fd:V N="pred1"><fd:G>self</fd:G></fd:V>
+<fd:V N="pred2"><fd:G>partner</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="pred-child-mother">
+<Variable ID="father" Type="c-person" Required="true" DefaultFocus="false"/>
+<Variable ID="mother" Type="c-person" Required="true" DefaultFocus="true"/>
+<Variable ID="child" Type="c-person" Required="false" DefaultFocus="false"/>
+<Property Value="father == child.birth.father"/>
+<Property Value="mother == child.birth.mother"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@mother-first. @mother-last. is the mother of his child, @name-first. @name-last.. "</fd:G></fd:V>
+<fd:V N="name-first"><fd:G>child.name.first-name</fd:G></fd:V>
+<fd:V N="name-last"><fd:G>child.name.last-name</fd:G></fd:V>
+<fd:V N="father-first"><fd:G>father.name.first-name</fd:G></fd:V>
+<fd:V N="father-last"><fd:G>father.name.last-name</fd:G></fd:V>
+<fd:V N="mother-first"><fd:G>mother.name.first-name</fd:G></fd:V>
+<fd:V N="mother-last"><fd:G>mother.name.last-name</fd:G></fd:V>
+<fd:V N="pred"><fd:G>c-ascription</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>c-child</fd:G></fd:V>
+<fd:V N="pred1"><fd:G>child</fd:G></fd:V>
+<fd:V N="pred2">
+<fd:V N="pred"><fd:G>c-conjunction</fd:G></fd:V>
+<fd:V N="0"><fd:G>father</fd:G></fd:V>
+<fd:V N="1"><fd:G>mother</fd:G></fd:V>
+</fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="pred-child-father">
+<Variable ID="father" Type="c-person" Required="true" DefaultFocus="true"/>
+<Variable ID="mother" Type="c-person" Required="true" DefaultFocus="false"/>
+<Variable ID="child" Type="c-person" Required="false" DefaultFocus="true"/>
+<Property Value="father == child.birth.father"/>
+<Property Value="mother == child.birth.mother"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"@father-first. @father-last. is the father of her child, @name-first. @name-last.. "</fd:G></fd:V>
+<fd:V N="name-first"><fd:G>child.name.first-name</fd:G></fd:V>
+<fd:V N="name-last"><fd:G>child.name.last-name</fd:G></fd:V>
+<fd:V N="father-first"><fd:G>father.name.first-name</fd:G></fd:V>
+<fd:V N="father-last"><fd:G>father.name.last-name</fd:G></fd:V>
+<fd:V N="mother-first"><fd:G>mother.name.first-name</fd:G></fd:V>
+<fd:V N="mother-last"><fd:G>mother.name.last-name</fd:G></fd:V>
+<fd:V N="pred"><fd:G>c-ascription</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>c-child</fd:G></fd:V>
+<fd:V N="pred1"><fd:G>child</fd:G></fd:V>
+<fd:V N="pred2">
+<fd:V N="pred"><fd:G>c-conjunction</fd:G></fd:V>
+<fd:V N="0"><fd:G>father</fd:G></fd:V>
+<fd:V N="1"><fd:G>mother</fd:G></fd:V>
+</fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="pred-relative">
+<Variable ID="self" Type="c-person" Required="true" DefaultFocus="false"/>
+<Variable ID="relative" Type="c-person" Required="false" DefaultFocus="false"/>
+<Variable ID="relation" Type="c-relative" Required="false" DefaultFocus="true"/>
+<Property Value="relation == self.family"/>
+<Property Value="relative == relation.relative"/>
+<Property Value="relation !UNDER c-child-relative"/>
+<Property Value="relation !UNDER c-parent-relative"/>
+<Output>
+<fd:FD>
+<fd:V N="template"><fd:G>"The @relation-type. of @name-first. @name-last. is @relative-fist. @relative-last.. "</fd:G></fd:V>
+<fd:V N="name-first"><fd:G>self.name.first-name</fd:G></fd:V>
+<fd:V N="name-last"><fd:G>self.name.last-name</fd:G></fd:V>
+<fd:V N="relative-first"><fd:G>relative.name.first-name</fd:G></fd:V>
+<fd:V N="relative-last"><fd:G>relative.name.last-name</fd:G></fd:V>
+<fd:V N="relation-type"><fd:G>relation.#TYPE</fd:G></fd:V>
+<fd:V N="pred"><fd:G>c-ascription</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>relation</fd:G></fd:V>
+<fd:V N="pred1"><fd:G>self</fd:G></fd:V>
+<fd:V N="pred2"><fd:G>relative</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Predicate ID="pred-death">
+<Variable ID="person" Type="c-person" Required="true" DefaultFocus="true"/>
+<Variable ID="death-event" Type="c-death-event" Required="false" DefaultFocus="false"/>
+<Property Value="death-event == person.death"/>
+<Output>
+<fd:FD>
+<fd:V N="pred"><fd:G>c-dead</fd:G></fd:V>
+<fd:V N="pred0"><fd:G>person</fd:G></fd:V>
+<fd:V N="mods">
+<fd:V N="time"><fd:G></fd:G></fd:V>
+<fd:V N="instant"><fd:G>birth-event.date-instant</fd:G></fd:V>
+</fd:V>
+<fd:V N="place"><fd:G>birth-event.place</fd:G></fd:V>
+</fd:FD>
+</Output>
+</Predicate>
+<Schema>
+<Node><KleenePlus>
+<Node><Predicate Name="pred-person">
+<Variable Name="person" Value="self"/>
+</Predicate></Node>
+</KleenePlus></Node>
+<Node><Optional>
+<Node><Predicate Name="pred-birth">
+<Variable Name="person" Value="self"/>
+</Predicate></Node>
+</Optional></Node>
+<Node><KleeneStar>
+<Node><Predicate Name="pred-alias">
+<Variable Name="person" Value="self"/>
+</Predicate></Node>
+</KleeneStar></Node>
+<Node><KleeneStar>
+<Node><Choice>
+<Node><Predicate Name="pred-father">
+<Variable Name="self" Value="self"/>
+<Variable Name="parent" Value="parent"/>
+</Predicate></Node>
+<Node><Predicate Name="pred-mother">
+<Variable Name="self" Value="self"/>
+<Variable Name="parent" Value="parent"/>
+</Predicate></Node>
+</Choice></Node>
+<Node><KleeneStar>
+<Node><Predicate Name="pred-person">
+<Variable Name="person" Value="parent"/>
+</Predicate></Node>
+</KleeneStar></Node>
+</KleeneStar></Node>
+<Node><KleeneStar>
+<Node><Predicate Name="pred-education">
+<Variable Name="person" Value="self"/>
+</Predicate></Node>
+</KleeneStar></Node>
+<Node><ParBoundary/></Node>
+<Node><KleeneStar>
+<Node><Predicate Name="pred-built">
+<Variable Name="person" Value="self"/>
+<Variable Name="built" Value="built"/>
+</Predicate></Node>
+<Node><KleeneStar>
+<Node><Predicate Name="pred-appraisal">
+<Variable Name="reason" Value="built"/>
+</Predicate></Node>
+</KleeneStar></Node>
+</KleeneStar></Node>
+<Node><KleeneStar>
+<Node><Predicate Name="pred-other-work-event">
+<Variable Name="person" Value="self"/>
+</Predicate></Node>
+</KleeneStar></Node>
+<Node><ParBoundary/></Node>
+<Node><KleeneStar>
+<Node><Predicate Name="pred-relationship">
+<Variable Name="self" Value="self"/>
+<Variable Name="partner" Value="partner"/>
+</Predicate></Node>
+<Node><KleeneStar>
+<Node><Choice>
+<Node><Predicate Name="pred-child-mother">
+<Variable Name="father" Value="self"/>
+<Variable Name="mother" Value="partner"/>
+<Variable Name="child" Value="child"/>
+</Predicate></Node>
+<Node><Predicate Name="pred-child-father">
+<Variable Name="father" Value="partner"/>
+<Variable Name="mother" Value="self"/>
+<Variable Name="child" Value="child"/>
+</Predicate></Node>
+</Choice></Node>
+<Node><KleeneStar>
+<Node><Predicate Name="pred-person">
+<Variable Name="person" Value="child"/>
+</Predicate></Node>
+</KleeneStar></Node>
+</KleeneStar></Node>
+</KleeneStar></Node>
+<Node><ParBoundary/></Node>
+<Node><KleeneStar>
+<Node><Predicate Name="pred-relative">
+<Variable Name="self" Value="self"/>
+<Variable Name="relative" Value="relative"/>
+</Predicate></Node>
+<Node><KleeneStar>
+<Node><Predicate Name="pred-person">
+<Variable Name="person" Value="relative"/>
+</Predicate></Node>
+</KleeneStar></Node>
+</KleeneStar></Node>
+<Node><Optional>
+<Node><Predicate Name="pred-death">
+<Variable Name="person" Value="self"/>
+</Predicate></Node>
+</Optional></Node>
+</Schema>
+</OpenSchema>

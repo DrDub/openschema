@@ -1,0 +1,52 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://local/" >
+  <rdf:Description rdf:about="http://local/object-1">
+    <j.0:name>"bicycle"</j.0:name>
+    <j.0:has-a rdf:resource="http://local/frame-1"/>
+    <j.0:has-a rdf:resource="http://local/wheel-1"/>
+    <j.0:TYPE>c-entity</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/explanation-1">
+    <j.0:TYPE>c-explanation-predicate</j.0:TYPE>
+    <j.0:canned-text>"Because they don't have an engine, muscular effort is required to use them."</j.0:canned-text>
+    <j.0:issue rdf:resource="http://local/analogy-1"/>
+    <j.0:object rdf:resource="http://local/object-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/wheel-1">
+    <j.0:name>"wheel"</j.0:name>
+    <j.0:TYPE>c-entity</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/illustration-1">
+    <j.0:attribute rdf:resource="http://local/wheel-1"/>
+    <j.0:canned-text>"The mountain-bike bycicle has special, all-terrain wheels."</j.0:canned-text>
+    <j.0:object rdf:resource="http://local/object-1"/>
+    <j.0:TYPE>c-illustration-predicate</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/illustration-2">
+    <j.0:canned-text>"Speed bycicles have very light wheels."</j.0:canned-text>
+    <j.0:attribute rdf:resource="http://local/wheel-1"/>
+    <j.0:object rdf:resource="http://local/object-1"/>
+    <j.0:TYPE>c-illustration-predicate</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/amplification-1">
+    <j.0:TYPE>c-amplification-predicate</j.0:TYPE>
+    <j.0:attribute rdf:resource="http://local/wheel-1"/>
+    <j.0:object rdf:resource="http://local/object-1"/>
+    <j.0:canned-text>"all bycicles have wheels."</j.0:canned-text>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/analogy-1">
+    <j.0:canned-text>"The bycicles are like a scooter without an engine."</j.0:canned-text>
+    <j.0:object rdf:resource="http://local/object-1"/>
+    <j.0:TYPE>c-analogy-predicate</j.0:TYPE>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/classification-1">
+    <j.0:TYPE>c-classification-predicate</j.0:TYPE>
+    <j.0:canned-text>"Bycicles are divided by frame size and wheel-types."</j.0:canned-text>
+    <j.0:object rdf:resource="http://local/object-1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://local/frame-1">
+    <j.0:name>"frame"</j.0:name>
+    <j.0:TYPE>c-entity</j.0:TYPE>
+  </rdf:Description>
+</rdf:RDF>

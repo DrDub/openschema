@@ -1,0 +1,235 @@
+person-2,TYPE,c-person
+person-2,name,name-1
+canned-factoid-1,TYPE,c-canned-factoid
+canned-factoid-1,canned-text,"shared award; Connery was one of the producers"
+person-1,TYPE,c-male
+person-1,family,mother-relative-1
+person-1,family,son-relative-1
+person-1,family,grandson-relative-1
+person-1,family,brother-relative-1
+person-1,family,father-relative-1
+person-1,occupation,wn-actor-1-1
+person-1,occupation,wn-director-3-1
+person-1,occupation,wn-mannequin-1-1
+person-1,occupation,wn-producer-2-1
+person-1,birth,birth-event-1
+person-1,significant-other,wife-1
+person-1,significant-other,wife-2
+person-1,work-event,film-made-1
+person-1,work-event,film-made-2
+person-1,work-event,received-prize-2
+person-1,work-event,received-prize-3
+person-1,work-event,join-organization-event-1
+person-1,work-event,communication-event-1
+person-1,work-event,communication-event-2
+person-1,work-event,received-prize-14
+person-1,education,canned-education-event-1
+person-1,education,education-graduation-1
+person-1,name,name-8
+person-1,alias,name-3
+person-1,claim-to-fame,canned-claim-to-fame-1
+communication-event-2,TYPE,c-communication-event
+communication-event-2,info-source,news-organization-2
+communication-event-2,communicator,person-1
+communication-event-2,communique,canned-quote-2
+name-6,TYPE,c-name
+name-6,last-name,"Quinn Connery"
+name-6,first-name,"Dashiell"
+name-5,TYPE,c-name
+name-5,name,"Whoopi Goldberg, "Cable" Magazine, 1989"
+date-11,TYPE,c-date
+date-11,year,1971
+join-organization-event-1,TYPE,c-join-organization-event
+join-organization-event-1,adjoint,agency-organization-1
+join-organization-event-1,adjoiner,person-1
+received-prize-3,TYPE,c-received-prize
+received-prize-3,reason,film-1
+received-prize-3,award,award-3
+received-prize-3,date-instant,date-3
+received-prize-3,awardee,person-1
+award-3,TYPE,c-award
+award-3,title,"Golden Globe"
+award-3,sub-title,"Best Supporting Actor"
+received-prize-14,TYPE,c-received-prize
+received-prize-14,reason,film-1
+received-prize-14,award,award-14
+received-prize-14,date-instant,date-18
+received-prize-14,awardee,person-1
+award-14,TYPE,c-award
+award-14,title,"Oscar"
+award-14,sub-title,"Best Supporting Actor"
+received-prize-2,TYPE,c-received-prize
+received-prize-2,reason,film-2
+received-prize-2,award,award-2
+received-prize-2,date-instant,date-2
+received-prize-2,awardee,person-1
+award-2,TYPE,c-award
+award-2,title,"BAFTA"
+award-2,sub-title,"Best Actor"
+date-17,TYPE,c-date
+date-17,year,1997
+person-28,TYPE,c-person
+person-28,name,name-7
+communication-event-1,TYPE,c-communication-event
+communication-event-1,info-source,news-organization-1
+communication-event-1,communicator,person-1
+communication-event-1,communique,canned-quote-1
+agency-organization-1,TYPE,c-agency-organization
+agency-organization-1,name,name-9
+college-1,TYPE,c-college
+college-1,name,name-13
+date-9,TYPE,c-date
+date-9,month,"June"
+date-9,year,1997
+film-made-2,TYPE,c-film-made
+film-made-2,builder,person-1
+film-made-2,built,film-2
+film-2,TYPE,c-film
+film-2,name,name-23
+name-23,TYPE,c-name
+name-23,full,""The Name of the Rose""
+person-53,TYPE,c-person
+person-53,name,name-14
+person-53,occupation,wn-driver-1-1
+award-12,TYPE,c-award
+award-12,title,"National Board of Review"
+award-12,sub-title,"Best Supporting Actor"
+wife-2,TYPE,c-wife
+wife-2,significant-other,person-28
+award-9,TYPE,c-award
+award-9,title,"National Board of Review"
+award-9,sub-title,"Career Achievement"
+son-relative-1,TYPE,c-son-relative
+son-relative-1,relative,person-19
+mother-relative-1,TYPE,c-mother-relative
+mother-relative-1,relative,person-5
+name-13,TYPE,c-name
+name-13,name,"British Legion training school"
+wife-1,TYPE,c-wife
+wife-1,significant-other,person-2
+name-12,TYPE,c-name
+name-12,name,"director Sidney Lumet, "Daily Variety", May 5, 1997"
+date-8,TYPE,c-date
+date-8,year,1962
+brother-relative-1,TYPE,c-brother-relative
+brother-relative-1,younger,"yes"
+brother-relative-1,relative,person-43
+wn-director-3-1,TYPE,c-wn-director-3
+name-8,TYPE,c-name
+name-8,last-name,"Connery"
+name-8,first-name,"Sean"
+person-5,TYPE,c-person
+person-5,name,name-2
+canned-quote-1,TYPE,c-canned-quote
+canned-quote-1,canned-text,""I would drink Sean Connery's bath water." "
+news-organization-1,TYPE,c-news-organization
+news-organization-1,name,name-5
+name-7,TYPE,c-name
+name-7,last-name,"Roquebrune"
+name-7,first-name,"Micheline"
+canned-focus-of-study-1,TYPE,c-canned-focus-of-study
+canned-focus-of-study-1,canned-text,"furniture polishing"
+wn-mannequin-1-1,TYPE,c-wn-mannequin-1
+birth-event-1,TYPE,c-birth-event
+birth-event-1,place,place-1
+birth-event-1,date-instant,date-16
+birth-event-1,name,name-10
+birth-event-1,mother,person-5
+birth-event-1,father,person-53
+name-9,TYPE,c-name
+name-9,name,""Creative Artists Agency""
+date-2,TYPE,c-date
+date-2,year,1987
+canned-quote-2,TYPE,c-canned-quote
+canned-quote-2,canned-text,""He's...one of the best actors there is, simple as that... With Sean, in addition to brilliant talent, there is a persona that every great star has. When Sean's...on the screen, it's hard to look at anything else. To be a great star, you have to be a first- rate actor, too...on that list of great actors, Sean ranks way high." "
+award-1,TYPE,c-award
+award-1,title,"ShoWest"
+award-1,sub-title,"Lifetime Achievement"
+education-graduation-1,TYPE,c-education-graduation
+education-graduation-1,teaching-agent,college-1
+education-graduation-1,subject-matter,canned-focus-of-study-1
+date-4,TYPE,c-date
+date-4,year,1998
+date-1,TYPE,c-date
+date-1,year,1999
+date-13,TYPE,c-date
+date-13,year,1996
+date-3,TYPE,c-date
+date-3,year,1987
+news-organization-2,TYPE,c-news-organization
+news-organization-2,name,name-12
+name-1,TYPE,c-name
+name-1,last-name,"Cilento"
+name-1,first-name,"Diane"
+place-1,TYPE,c-place
+place-1,country,"Scotland"
+place-1,city,"Edinburgh"
+name-14,TYPE,c-name
+name-14,last-name,"Connery"
+name-14,first-name,"Joseph"
+birth-event-3,TYPE,c-birth-event
+birth-event-3,date,date-9
+father-relative-1,TYPE,c-father-relative
+father-relative-1,relative,person-53
+date-16,TYPE,c-date
+date-16,month,8
+date-16,day,25
+date-16,year,1930
+person-43,TYPE,c-person
+person-43,name,name-11
+name-10,TYPE,c-name
+name-10,last-name,"Sean Connery"
+name-10,first-name,"Thomas"
+film-made-1,TYPE,c-film-made
+film-made-1,builder,person-1
+film-made-1,built,film-1
+film-1,TYPE,c-film
+film-1,name,name-22
+name-22,TYPE,c-name
+name-22,full,""The Untouchables""
+date-15,TYPE,c-date
+date-15,year,1987
+wn-actor-1-1,TYPE,c-wn-actor-1
+wn-driver-1-1,TYPE,c-wn-driver-1
+date-10,TYPE,c-date
+date-10,year,1990
+name-2,TYPE,c-name
+name-2,last-name,"Connery"
+name-2,first-name,"Euphamia"
+date-18,TYPE,c-date
+date-18,year,1987
+grandson-relative-1,TYPE,c-grandson-relative
+grandson-relative-1,relative,person-27
+name-11,TYPE,c-name
+name-11,last-name,"Connery"
+name-11,first-name,"Neil"
+name-11,given-name,"Sean"
+name-4,TYPE,c-name
+name-4,last-name,"Joseph Connery"
+name-4,first-name,"Jason"
+birth-event-2,TYPE,c-birth-event
+birth-event-2,date,date-6
+birth-event-2,father,person-1
+birth-event-2,mother,person-2
+date-14,TYPE,c-date
+date-14,year,1998
+wn-producer-2-1,TYPE,c-wn-producer-2
+person-27,TYPE,c-person
+person-27,birth,birth-event-3
+person-27,name,name-6
+date-7,TYPE,c-date
+date-7,year,1998
+person-19,TYPE,c-person
+person-19,birth,birth-event-2
+person-19,name,name-4
+date-12,TYPE,c-date
+date-12,year,1993
+date-6,TYPE,c-date
+date-6,month,"January"
+date-6,day,11
+date-6,year,1963
+canned-education-event-1,TYPE,c-canned-education-event
+canned-education-event-1,canned-text," Dropped out of school at age 13 "
+name-3,TYPE,c-name
+name-3,first-name,"James"
+name-3,last-name,"Bond"

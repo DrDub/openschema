@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+
+<rdf:RDF 
+xmlns:rdf= "http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+xml:base=  "http://local/">
+
+<rdfs:Class rdf:ID="c-person" />
+
+<rdfs:Class rdf:ID="c-male">
+<rdfs:subClassOf rdf:resource="#c-person"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-female">
+<rdfs:subClassOf rdf:resource="#c-person"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-work-event" />
+
+<rdfs:Class rdf:ID="c-built-event">
+<rdfs:subClassOf rdf:resource="#c-work-event"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-film-made">
+<rdfs:subClassOf rdf:resource="#c-built-event"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-received-prize">
+<rdfs:subClassOf rdf:resource="#c-work-event"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-communication-event">
+<rdfs:subClassOf rdf:resource="#c-work-event"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-join-organization-event">
+<rdfs:subClassOf rdf:resource="#c-work-event"/>
+</rdfs:Class>
+
+
+<rdfs:Class rdf:ID="c-occupation" />
+
+<rdfs:Class rdf:ID="c-wn-driver-1">
+<rdfs:subClassOf rdf:resource="#c-occupation"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-wn-actor-1">
+<rdfs:subClassOf rdf:resource="#c-occupation"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-wn-athlete-1">
+<rdfs:subClassOf rdf:resource="#c-occupation"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-wn-comedian-2">
+<rdfs:subClassOf rdf:resource="#c-occupation"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-wn-composer-1">
+<rdfs:subClassOf rdf:resource="#c-occupation"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-wn-director-3">
+<rdfs:subClassOf rdf:resource="#c-occupation"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-wn-mannequin-1">
+<rdfs:subClassOf rdf:resource="#c-occupation"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-wn-musician-2">
+<rdfs:subClassOf rdf:resource="#c-occupation"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-wn-producer-2">
+<rdfs:subClassOf rdf:resource="#c-occupation"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-wn-reporter-1">
+<rdfs:subClassOf rdf:resource="#c-occupation"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-wn-announcer-2">
+<rdfs:subClassOf rdf:resource="#c-occupation"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-wn-writer-1">
+<rdfs:subClassOf rdf:resource="#c-occupation"/>
+</rdfs:Class>
+
+
+<rdfs:Class rdf:ID="c-education-event" />
+
+<rdfs:Class rdf:ID="c-education-graduation">
+<rdfs:subClassOf rdf:resource="#c-education-event"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-canned-education-event">
+<rdfs:subClassOf rdf:resource="#c-education-event"/>
+</rdfs:Class>
+
+
+<rdfs:Class rdf:ID="c-relationship" />
+
+<rdfs:Class rdf:ID="c-wife">
+<rdfs:subClassOf rdf:resource="#c-relationship"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-relative" />
+
+<rdfs:Class rdf:ID="c-child-relative">
+<rdfs:subClassOf rdf:resource="#c-relative"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-son-relative">
+<rdfs:subClassOf rdf:resource="#c-child-relative"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-parent-relative">
+<rdfs:subClassOf rdf:resource="#c-relative"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-father-relative">
+<rdfs:subClassOf rdf:resource="#c-parent-relative"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-mother-relative">
+<rdfs:subClassOf rdf:resource="#c-parent-relative"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-grandson-relative">
+<rdfs:subClassOf rdf:resource="#c-relative"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-brother-relative">
+<rdfs:subClassOf rdf:resource="#c-relative"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-film" />
+
+<rdfs:Class rdf:ID="c-place" />
+
+<rdfs:Class rdf:ID="c-date" />
+
+<rdfs:Class rdf:ID="c-predicate" />
+
+<rdfs:Class rdf:ID="c-amplification-predicate">
+<rdfs:subClassOf rdf:resource="#c-predicate"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-illustration-predicate">
+<rdfs:subClassOf rdf:resource="#c-predicate"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-classification-predicate">
+<rdfs:subClassOf rdf:resource="#c-predicate"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-analogy-predicate">
+<rdfs:subClassOf rdf:resource="#c-predicate"/>
+</rdfs:Class>
+
+<rdfs:Class rdf:ID="c-explanation-predicate">
+<rdfs:subClassOf rdf:resource="#c-predicate"/>
+</rdfs:Class>
+
+</rdf:RDF>

@@ -1,0 +1,32 @@
+This is a preliminar version, after check out, modify the SCHEMATOP
+assignment in the shell scripts in the scripts/ directory.
+
+Also change some of the properties in build.xml (build.compiler and
+jwsdp.home, for instance).
+
+To compile do 
+
+ant compile-samples
+
+To see some samples, in the samples directory execute:
+
+../scripts/template-system.sh template-biography.xml sean.rdf ontology.rdfs self person-1
+
+The output should be
+
+Sean Connery is a c-wn-actor-1. Sean Connery is a c-wn-director-3. Sean Connery is a c-wn-producer-2. Sean Connery is a c-wn-mannequin-1. Sean Connery was born in 8/25/1930 at Edinburgh, , Scotland. Sean Connery is also known as James Bond. Sean Connery studied furniture polishing in British Legion training school. Sean Connery studied  in . 
+
+Sean Connery participated in the making of "The Untouchables". Sean Connery received Golden Globe Best Supporting Actor from  because of "The Untouchables". Sean Connery received Oscar Best Supporting Actor from  because of "The Untouchables". Sean Connery participated in the making of "The Name of the Rose". Sean Connery received BAFTA Best Actor from  because of "The Name of the Rose". 
+
+Sean Connery c-wife to Diane Cilento. Diane Cilento is the mother of his child, Jason Joseph Connery. Sean Connery c-wife to Micheline Roquebrune. 
+
+The c-grandson-relative of Sean Connery is  Quinn Connery. The c-brother-relative of Sean Connery is  Connery. 
+
+
+and 
+
+../scripts/template-system.sh attributive.xml attributive-ex.rdf ontology.rdfs object object-1
+
+to obtain
+
+bicycle has a frame. bicycle has a wheel. all bycicles have wheels. The mountain-bike bycicle has special, all-terrain wheels. Speed bycicles have very light wheels. Bycicles are divided by frame size and wheel-types. The bycicles are like a scooter without an engine. Because they don't have an engine, muscular effort is required to use them. 

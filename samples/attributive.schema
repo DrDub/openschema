@@ -1,0 +1,90 @@
+; McKeown's attributive schema, adapted for a template system
+
+predicate attributive
+  variables
+    req object : c-entity
+    def attribute : c-entity
+  properties
+    attribute == object.has-a
+  output
+    template "@object-name. has a @attribute-name.. "
+    object-name object.name
+    attribute-name attribute.name
+    object object
+    attribute attribute
+
+predicate amplification
+  variables
+    req object : c-entity
+    req def attribute : c-entity
+    amplification-pred : c-amplification-predicate
+  properties
+    attribute == object.has-a
+    object == amplification-pred.object
+    attribute == amplification-pred.attribute
+  output
+    template "@canned-text. "
+    object object
+    attribute attribute
+    canned-text amplification-pred.canned-text
+    
+predicate particular-illustration
+  variables
+    req object : c-entity
+    req def attribute : c-entity
+    illustration-pred : c-illustration-predicate
+  properties
+    attribute == object.has-a
+    object == illustration-pred.object
+    attribute == illustration-pred.attribute
+  output
+    template "@canned-text. "
+    object object
+    attribute attribute
+    canned-text illustration-pred.canned-text
+
+predicate classification
+  variables
+    req def object : c-entity
+    classification-pred : c-classification-predicate
+  properties
+    object == classification-pred.object
+  output
+    template "@canned-text. "
+    object object
+    canned-text classification-pred.canned-text
+
+predicate analogy
+  variables
+    req def object : c-entity
+    analogy-pred : c-analogy-predicate
+  properties
+    object == analogy-pred.object
+  output
+    template "@canned-text. "
+    object object
+    canned-text analogy-pred.canned-text
+
+predicate explanation
+  variables
+    req def object : c-entity
+    issue : c-predicate
+    explanation-pred : c-explanation-predicate
+  properties
+    object == explanation-pred.object
+  output
+    template "@canned-text. "
+    object object
+    issue issue
+    canned-text explanation-pred.canned-text
+
+schema attributive(object: c-entity)
+  attributive(entity|object)
+  amplification(entity|object)
+  star
+    particular-illustration(entity|object,attribute|attribute)
+  optional
+    classification(entity|object,attribute|attribute)
+  analogy(entity|object,analogy-pred|analogy)
+  choice
+    explanation(entity|object,issue|analogy)

@@ -1,0 +1,30 @@
+object-1,TYPE,c-entity
+object-1,name,"bicycle"
+object-1,has-a,wheel-1
+object-1,has-a,frame-1
+wheel-1,TYPE,c-entity
+wheel-1,name,"wheel"
+frame-1,TYPE,c-entity
+frame-1,name,"frame"
+amplification-1,TYPE,c-amplification-predicate
+amplification-1,object,object-1
+amplification-1,attribute,wheel-1
+amplification-1,canned-text,"all bycicles have wheels."
+illustration-1,TYPE,c-illustration-predicate
+illustration-1,object,object-1
+illustration-1,attribute,wheel-1
+illustration-1,canned-text,"The mountain-bike bycicle has special, all-terrain wheels."
+illustration-2,TYPE,c-illustration-predicate
+illustration-2,object,object-1
+illustration-2,attribute,wheel-1
+illustration-2,canned-text,"Speed bycicles have very light wheels."
+classification-1,TYPE,c-classification-predicate
+classification-1,object,object-1
+classification-1,canned-text,"Bycicles are divided by frame size and wheel-types."
+analogy-1,TYPE,c-analogy-predicate
+analogy-1,object,object-1
+analogy-1,canned-text,"The bycicles are like a scooter without an engine."
+explanation-1,TYPE,c-explanation-predicate
+explanation-1,object,object-1
+explanation-1,issue,analogy-1
+explanation-1,canned-text,"Because they don't have an engine, muscular effort is required to use them."
