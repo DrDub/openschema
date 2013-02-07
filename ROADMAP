@@ -1,0 +1,71 @@
+OPENSCHEMA ROADMAP
+
+current status: pre-alpha
+
+release pre-alpha0.04
+
+
+Milestones:
+
+* python-like language Java parsing
+
+The perl script to parse the python-like schemata should be moved to
+Java.
+
+
+
+** Alpha will occur here
+
+
+
+* Property language, CSP engines
+
+The property language as defined currently is too much in the air.
+The whole problem of finding values satisfying the list of constraints
+is that of solving constraint satisfaction programs (CSP).  There are
+a number of CSP engines available, OpenSchema can well rely upon them
+for computing the values.
+
+
+* Variable bindings
+
+The variable bindings used currently in OpenSchema are quite fluffy.
+A syntactic definition is desireable.
+
+
+
+** Beta will occur here
+
+
+
+* FrameSet SQL binding
+
+Provide a class that instantiates the FrameSet interface from an
+SQL-backend (note that knowledge about the structure of the knowledge
+base will be needed to make it work).
+
+
+* Schema to XSL compilation
+
+Even if a matter of debate, the expressive power of XSL can be enough
+to represent schemata. An implementation of schemata that compiles to
+XSL can be useful to deploy schema without using any instantiation
+engine besides the XSL one.
+
+
+* Integration with existing Java template-based systems
+
+Strategic generation can well be incorporated into template-based
+systems. Such systems can be primary users of OpenSchema.
+
+
+* Integration with jFUF and OpenCCG
+
+More complex NLG systems will require a surface realizer. There are
+two available under open licenses (jFUF and OpenCCG). Integrating them
+within OpenSchema provides a sketch of a full-fledge NLG system under
+GPL.
+
+
+
+** production release

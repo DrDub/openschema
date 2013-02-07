@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>OpenSchema</title>
+<Link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+<h1>OpenSchema</h1>
+
+<p> OpenSchema provides a declarative implementation of (<a
+href="http://www.cs.columbia.edu/~kathy/">McKeown</a> 1985) document
+structuring schemata. Schemata are a widespread strategic generation
+solution, targetting texts where the structure has got fixed after a
+period of time (so no reasoning process can re-create this
+structure).</p>
+
+<p>OpenSchema is a SourceForge <a
+href="http://sourceforge.net/projects/openschema">project</a>. The
+project's unreleased files are available through <a
+href="http://sourceforge.net/p/openschema/git">GIT</a>.</p>
+
+<p>[ <a href="http://sourceforge.net/projects/openschema">SourceForge project</a> ]
+[ <a href="javadoc/index.html">Javadoc</a> ]
+[ <a href="http://sourceforge.net/p/openschema/git">GIT</a> ]
+[ <a href="ROADMAP">Roadmap</a> ]</p><br/>
+
+
+<h2>What is strategic generation?</h2>
+
+<p><b>Strategic generation</b> is the stage of a generation system
+that decides what to say, compared to the tactical generation
+component, that decides how to say it.  It involves selecting the
+relevant content to include in the output (<b>Content Selection</b>)
+and imposing an order to it (<b>Document Structuring</b>).</p>
+
+<p>The name <i>strategic generation</i> and the division into two
+modules is one of the eldest architectures in NLG. Current generation
+architectures divide the system into at least three modules, text
+planning (the strategic generation component), sentence planning and
+surface realization (the tactical generation component). The <a
+href="http://www.itri.brighton.ac.uk/projects/rags/overview.html">RAGS
+project</a> is a recent example of a concensus architecture.</p>
+
+<p>[ <a href="http://sourceforge.net/projects/openschema">SourceForge project</a> ]
+[ <a href="javadoc/index.html">Javadoc</a> ]
+[ <a href="http://sourceforge.net/p/openschema/git">GIT</a> ]
+[ <a href="ROADMAP">Roadmap</a> ]</p><br/>
+
+<h2>What are schemata?</h2>
+
+<p>Document Structuring Schemata are a means to do strategic
+generation.  Starting from a pool of coarsely relevant knowledge (the
+<i>relevant knowledge pool</i>), schemata are finite state machines
+with terminals in a language of <b>rhetorical predicates</b>.
+
+<p>In her work, McKeown analyzed a number of texts in different genre
+(all of expository in nature) and found out four different
+organizational strategies that captured a large number of texts.  She
+termed these four strategies as ``schemata.'' and defined them as</p>
+
+<blockquote>
+    <p><i>(...) a representation of a standard pattern of discourse
+    structure which efficiently encodes a set of communicative
+    techniques that a speaker can use for a particular discourse
+    purpose. It defines a particular organizing principle for text and
+    is used to structure the information that will be included in the
+    answer. It is used to <b>guide</b> the generation process,
+    controlling decisions of what to say when in the text.</i></p>
+</blockquote>
+<p align=right>(McKeown, 1985, p.20)</p>
+
+<p>OpenSchema extends McKeown's work by providing a declarative
+definition of her predicates, now not necessarily rhetorical in nature
+(a more appropriate name for these predicates is <b>communicative</b>
+predicates).</p>
+
+<p>[ <a href="http://sourceforge.net/projects/openschema">SourceForge project</a> ]
+[ <a href="javadoc/index.html">Javadoc</a> ]
+[ <a href="http://sourceforge.net/p/openschema/git">GIT</a> ]
+[ <a href="ROADMAP">Roadmap</a> ]</p><br/>
+
+<!-- ul>
+  <li><a href="FAQ.html#schema_def">What are document structuring schemata?</a></li>
+  <li><a href="glance.html">OpenSchema-at-a-glance</a></li>
+  <li><a href="javadoc/index.html">Javadoc</a></li>
+  <li><a href="download/">Download</a></li>
+  <li><a href="samples.html">Samples</a></li>
+  <li><a href="ROADMAP">Roadmap</a><li>
+  <li><a href="FAQ.html">FAQ</a></li>
+</ul -->
+
+
+<hr>
+<address></address>
+  <br/>  
+  By: <a href="http://duboue.net">Pablo A. Duboue</a>
+- &lt;pablo.duboue@gmail.com&gt;.
+
+<p align=right>Hosted by: <A href="http://sourceforge.net"><IMG
+src="http://sourceforge.net/sflogo.php?group_id=113829&type=5"
+width="210" height="62" border="0" alt="SourceForge.net Logo"/></A></p>
+
+</body> </html>
