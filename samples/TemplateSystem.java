@@ -2,7 +2,7 @@
  * OPENSCHEMA
  * An open source implementation of document structuring schemata.
  *
- * Copyright (C) 2004 Pablo Ariel Duboue
+ * Copyright (C) 2004-2013 Pablo Ariel Duboue <pablo.duboue@gmail.com>
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -32,7 +32,7 @@ import edu.columbia.fuf.FD;
  * variable of the form @name. should have a "name" entry in the FD
  * with the value that will be inserted at that position.
  *
- * @author Pablo Ariel Duboue (pablo@cs.columbia.edu)
+ * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
  * @version $Revision: 1.1 $, $Date: 2004/07/12 09:34:01 $
  */
 

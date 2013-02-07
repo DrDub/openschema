@@ -1,12 +1,8 @@
-This is a preliminar version, after check out, modify the SCHEMATOP
-assignment in the shell scripts in the scripts/ directory.
+mvn install should work, but the old samples are not currently working.
 
-Also change some of the properties in build.xml (build.compiler and
-jwsdp.home, for instance).
 
-To compile do 
 
-ant compile-samples
+The old samples behave like this:
 
 To see some samples, in the samples directory execute:
 
