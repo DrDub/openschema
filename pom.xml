@@ -58,11 +58,36 @@
 					</execution>
 				</executions>
 			</plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9</version>
-      </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>jar-with-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<!--  finalName>openschema-${project.version}</finalName -->
+							<finalName>openschema</finalName>
+							<archive>
+								<manifest>
+									<mainClass>net.sf.openschema.demo.TemplateSystem</mainClass>
+								</manifest>
+							</archive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -73,4 +98,15 @@
 			<version>2.7.4</version>
 		</dependency>
 	</dependencies>
+	<scm>
+		<url>http://git.code.sf.net/p/openschema/git</url>
+	</scm>
+	<organization>
+		<name>Pablo Duboue</name>
+		<url>http://duboue.net</url>
+	</organization>
+	<url>http://openschema.sf.net</url>
+	<issueManagement>
+		<url>https://sourceforge.net/p/openschema/tickets/</url>
+	</issueManagement>
 </project>
