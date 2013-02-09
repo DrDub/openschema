@@ -1,0 +1,73 @@
+package net.sf.openschema.demo;
+
+/***********************************************************************
+ * OPENSCHEMA
+ * An open source implementation of document structuring schemata.
+ *
+ * Copyright (C) 2004-2013 Pablo Ariel Duboue <pablo.duboue@gmail.com>
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111, USA.
+ ***********************************************************************/
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Resource;
+
+/**
+ * Helper class to transform a list of triples to RDF. Used by
+ * scripts/text-to-rdf.sh.
+ * 
+ * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
+ */
+
+public class TextToRDF {
+	/** Main. */
+	public static void main(String[] args) throws IOException {
+		Model model = ModelFactory.createDefaultModel();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String line = br.readLine();
+		List<String[]> triples = new ArrayList<String[]>();
+		Set<String> seen = new HashSet<String>();
+
+		while (line != null) {
+			String[] parts = line.split(",", 3);
+			// resource, property, value
+			seen.add(parts[0]);
+			triples.add(parts);
+			line = br.readLine();
+		}
+		Iterator<String[]> t = triples.iterator();
+		while (t.hasNext()) {
+			String[] triple = t.next();
+
+			Resource resource = model.createResource("http://local/" + triple[0]);
+			if (seen.contains(triple[2]))
+				resource.addProperty(model.createProperty("http://local/", triple[1]),
+						model.createResource("http://local/" + triple[2]));
+			else
+				resource.addProperty(model.createProperty("http://local/", triple[1]), triple[2]);
+		}
+		model.write(System.out);
+	}
+}
