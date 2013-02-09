@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.openschema</groupId>
 	<artifactId>openschema</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>Document Structuring schema for Natural Language Generation</name>
 	<description>An Open Source Java implementation of Document Structuring schema 
 	(pl. schemata). Schemata structure (order) a set of facts (RDF in this case). 
