@@ -1,5 +1,3 @@
-package net.sf.openschema.demo;
-
 /***********************************************************************
  * OPENSCHEMA
  * An open source implementation of document structuring schemata.
@@ -21,8 +19,11 @@ package net.sf.openschema.demo;
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111, USA.
  ***********************************************************************/
 
+package net.sf.openschema.demo;
+
 import java.io.FileInputStream;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +37,8 @@ import net.sf.openschema.OpenSchemaPlanner;
 import net.sf.openschema.RDFFrameSet;
 import net.sf.openschema.RDFOntology;
 import net.sf.openschema.SimpleFocusChooser;
+import net.sf.openschema.util.CsvToRdfFilterStream;
+import net.sf.openschema.util.SchemaToXmlFilterStream;
 
 import org.xml.sax.InputSource;
 
@@ -56,7 +59,8 @@ public class TemplateSystem {
 	/** Main. */
 	public static void main(String[] args) throws Exception {
 		if (args.length < 2) {
-			System.err.println("Usage: TemplateSystem schema.xml data.rdf attribute value attribute value ...");
+			System.err
+					.println("Usage: TemplateSystem schema.(xml|schema) data.(rdf|csv) ontology.rdfs attribute value attribute value ...");
 			System.exit(0);
 		}
 		if (verbose)
@@ -64,7 +68,10 @@ public class TemplateSystem {
 		Ontology ontology = new RDFOntology(new FileInputStream(args[2]), "file://" + args[1]);
 		if (verbose)
 			System.err.println("Loaded.");
-		InputSource inputSource = new InputSource(new FileReader(args[0]));
+		InputStream schemaIS = new FileInputStream(args[0]);
+		if (args[0].endsWith(".schema"))
+			schemaIS = new SchemaToXmlFilterStream(schemaIS);
+		InputSource inputSource = new InputSource(new InputStreamReader(schemaIS));
 		if (verbose)
 			System.err.print("Loading schema... ");
 		OpenSchemaPlanner schema = new OpenSchemaPlanner(inputSource, new SimpleFocusChooser(ontology));
@@ -75,7 +82,10 @@ public class TemplateSystem {
 			System.err.println(schema.dump());
 			System.err.print("Loading frames... ");
 		}
-		FrameSet frames = new RDFFrameSet(new FileInputStream(args[1]), "file://" + args[1]);
+		InputStream framesIS = new FileInputStream(args[1]);
+		if (args[1].endsWith(".csv"))
+			framesIS = new CsvToRdfFilterStream(framesIS);
+		FrameSet frames = new RDFFrameSet(framesIS, "file://" + args[1]);
 		if (verbose) {
 			System.err.println("Loaded.");
 			for (Frame frame : frames.getFrames())

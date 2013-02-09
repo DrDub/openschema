@@ -1,5 +1,3 @@
-package net.sf.openschema.demo;
-
 /***********************************************************************
  * OPENSCHEMA
  * An open source implementation of document structuring schemata.
@@ -21,53 +19,29 @@ package net.sf.openschema.demo;
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111, USA.
  ***********************************************************************/
 
+package net.sf.openschema.demo;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Resource;
+import net.sf.openschema.util.SchemaToXmlFilterStream;
 
 /**
- * Helper class to transform a list of triples to RDF. Used by
- * scripts/text-to-rdf.sh.
+ * Helper class to transform a schema DSL into OpenSchema XML.
  * 
  * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
  */
 
-public class TextToRDF {
+public class SchemaToXML {
 	/** Main. */
 	public static void main(String[] args) throws IOException {
-		Model model = ModelFactory.createDefaultModel();
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader br = new BufferedReader(new InputStreamReader(new SchemaToXmlFilterStream(System.in)));
 		String line = br.readLine();
-		List<String[]> triples = new ArrayList<String[]>();
-		Set<String> seen = new HashSet<String>();
-
 		while (line != null) {
-			String[] parts = line.split(",", 3);
-			// resource, property, value
-			seen.add(parts[0]);
-			triples.add(parts);
+			System.out.println(line);
 			line = br.readLine();
 		}
-		Iterator<String[]> t = triples.iterator();
-		while (t.hasNext()) {
-			String[] triple = t.next();
-
-			Resource resource = model.createResource("http://local/" + triple[0]);
-			if (seen.contains(triple[2]))
-				resource.addProperty(model.createProperty("http://local/", triple[1]),
-						model.createResource("http://local/" + triple[2]));
-			else
-				resource.addProperty(model.createProperty("http://local/", triple[1]), triple[2]);
-		}
-		model.write(System.out);
+		br.close();
 	}
 }

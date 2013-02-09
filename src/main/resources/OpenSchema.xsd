@@ -5,9 +5,7 @@
 	elementFormDefault="qualified" attributeFormDefault="unqualified"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-	<xs:import namespace="http://jfuf.sf.net/FD" schemaLocation="FD.xsd"/> 
-		
-<!-- 	xsi:noNamespaceSchemaLocation="FD.xsd" /> xsi:noNamespaceSchemaLocation="file:src/main/resources/FD.xsd" /> -->
+	<xs:import namespace="http://jfuf.sf.net/FD" schemaLocation="FD.xsd" />
 
 	<xs:element name="OpenSchema">
 		<xs:complexType>
@@ -47,7 +45,8 @@
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="Schema" type="SchemaNode" minOccurs="1"
-					maxOccurs="1" />
+					maxOccurs="1">
+				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -97,5 +96,6 @@
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
+		<xs:attribute name="Name" type="xs:token" default="schema" />
 	</xs:complexType>
 </xs:schema>
