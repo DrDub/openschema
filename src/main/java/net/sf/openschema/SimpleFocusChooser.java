@@ -64,8 +64,7 @@ public class SimpleFocusChooser extends LocalChooser {
 	 */
 	public Decision choose(List<Map<String, Object>> fds, List<Frame> defaultFoci, Object currentFocus,
 			List<Frame> potentialFoci, List<Frame> focusStack, FrameSet frames) {
-		// first heuristic: choose a shift of focus, if possible
-		// CF(new) \in PFL(last)
+		// first heuristic: choose a shift of focus, if possible CF(new) \in PFL(last)
 		List<Integer> candidatePositions = new ArrayList<Integer>();
 		List<Frame> candidateDefaultFoci = new ArrayList<Frame>();
 		for (int i = 0; i < fds.size(); i++)
@@ -77,8 +76,7 @@ public class SimpleFocusChooser extends LocalChooser {
 		if (candidatePositions.size() > 0)
 			return chooseOnPotentialToPotentialLinks(candidatePositions, candidateDefaultFoci, fds, potentialFoci,
 					frames);
-		// second heuristic: choose to stay on focus
-		// CF(new) == CF(last)
+		// second heuristic: choose to stay on focus CF(new) == CF(last)
 		for (int i = 0; i < fds.size(); i++)
 			if (defaultFoci.get(i).equals(currentFocus)) {
 				candidatePositions.add(new Integer(i));
@@ -88,8 +86,7 @@ public class SimpleFocusChooser extends LocalChooser {
 			return chooseOnPotentialToPotentialLinks(candidatePositions, candidateDefaultFoci, fds, potentialFoci,
 					frames);
 
-		// third heuristic: choose from the focus stack
-		// CF(new) \in focus-stack
+		// third heuristic: choose from the focus stack CF(new) \in focus-stack
 		for (int i = 0; i < fds.size(); i++)
 			if (focusStack.contains(defaultFoci.get(i))) {
 				candidatePositions.add(new Integer(i));
@@ -99,15 +96,13 @@ public class SimpleFocusChooser extends LocalChooser {
 			return chooseOnPotentialToPotentialLinks(candidatePositions, candidateDefaultFoci, fds, potentialFoci,
 					frames);
 
-		// now consider the potential foci for each chance and repeat
-		// the heuristics
+		// now consider the potential foci for each chance and repeat the heuristics
 		@SuppressWarnings("unchecked")
 		List<Frame>[] newPotentialFoci = new List[fds.size()];
 		for (int i = 0; i < fds.size(); i++)
 			newPotentialFoci[i] = new ArrayList<Frame>(extractPotentialFoci(fds.get(i), frames));
 
-		// first heuristic: choose a shift of focus, if possible
-		// CF(new) \in PFL(last)
+		// first heuristic: choose a shift of focus, if possible CF(new) \in PFL(last)
 		for (int i = 0; i < fds.size(); i++)
 			for (int j = 0; j < newPotentialFoci[i].size(); j++)
 				if (potentialFoci.contains(newPotentialFoci[i].get(j))) {
@@ -118,8 +113,7 @@ public class SimpleFocusChooser extends LocalChooser {
 		if (candidatePositions.size() > 0)
 			return chooseOnPotentialToPotentialLinks(candidatePositions, candidateDefaultFoci, fds, potentialFoci,
 					frames);
-		// second heuristic: choose to stay on focus
-		// CF(new) == CF(last)
+		// second heuristic: choose to stay on focus CF(new) == CF(last)
 		for (int i = 0; i < fds.size(); i++)
 			for (int j = 0; j < newPotentialFoci[i].size(); j++)
 				if (newPotentialFoci[i].get(j) == currentFocus) {
@@ -131,8 +125,7 @@ public class SimpleFocusChooser extends LocalChooser {
 			return chooseOnPotentialToPotentialLinks(candidatePositions, candidateDefaultFoci, fds, potentialFoci,
 					frames);
 
-		// third heuristic: choose from the focus stack
-		// CF(new) \in focus-stack
+		// third heuristic: choose from the focus stack CF(new) \in focus-stack
 		for (int i = 0; i < fds.size(); i++)
 			for (int j = 0; j < newPotentialFoci[i].size(); j++)
 				if (focusStack.contains(newPotentialFoci[i].get(j))) {
