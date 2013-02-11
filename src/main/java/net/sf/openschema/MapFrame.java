@@ -115,4 +115,55 @@ public class MapFrame extends HashMap<String, Object> implements Frame {
 	public int hashCode() {
 		return super.get("#ID").hashCode();
 	}
+
+	// need to redefine equals as Maps cannot be circular and compare
+	public boolean equals(Object other) {
+		if (other instanceof Frame)
+			return ((Frame) other).getID().equals(this.getID());
+		return false;
+	}
+
+	// need to redefine equals as Maps cannot be circular and stringify
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		toString(sb, new HashSet<String>());
+		return sb.toString();
+	}
+
+	@SuppressWarnings("rawtypes")
+	protected void toString(StringBuilder sb, HashSet<String> seen) {
+		String id = this.getID();
+		sb.append("Frame@").append(id).append('#').append(this.getType()).append('[');
+		if (seen.contains(id)) {
+			sb.append("..]");
+			return;
+		}
+		seen.add(id);
+		boolean first = true;
+		for (String key : this.keySet()) {
+			if (first)
+				first = false;
+			else
+				sb.append(';');
+			sb.append(key).append('=');
+			Object value = this.get(key);
+			if (value instanceof MapFrame)
+				((MapFrame) value).toString(sb, seen);
+			else if (value instanceof List) {
+				sb.append('{');
+				boolean first2 = true;
+				for (Object o : ((List) value)) {
+					if (first2)
+						first2 = false;
+					else
+						sb.append(',');
+					if (o instanceof MapFrame)
+						((MapFrame) o).toString(sb, seen);
+					else
+						sb.append(o.toString());
+				}
+			} else
+				sb.append(value.toString());
+		}
+	}
 }
