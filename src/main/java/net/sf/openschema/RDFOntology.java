@@ -34,16 +34,14 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 
 /**
- * An implementation of the <tt>Ontology</tt> interface from and RDF Schema
- * (rdfs) file.
+ * An implementation of the <tt>Ontology</tt> interface from and RDF Schema (rdfs) file.
  * 
  * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
  */
 
 public class RDFOntology implements Ontology {
 	/**
-	 * Parents of a given concept, map from concept name to Set of parent
-	 * concepts.
+	 * Parents of a given concept, map from concept name to Set of parent concepts.
 	 */
 	protected Map<String, Set<String>> parentsOf;
 
@@ -108,14 +106,11 @@ public class RDFOntology implements Ontology {
 	}
 
 	/**
-	 * Some notion of semantic distance between the two concepts. Currently, it
-	 * returns Double.MAX_VALUE if any of the concepts is null or unknown to the
-	 * ontology or if they are completely unrelated (they don't share any
-	 * ancestor in common, something that cannot happen in RDF-based ontologies,
-	 * all concepts derive from 'Class'). If the two concepts are the same, the
-	 * distance is 0. If one is a parent of the other, the distance is 0.5
-	 * (nevermind the distance). Otherwise the distance is 0.5 plus 0.1 for each
-	 * level up until a common ancestor is found.
+	 * Some notion of semantic distance between the two concepts. Currently, it returns Double.MAX_VALUE if any of the
+	 * concepts is null or unknown to the ontology or if they are completely unrelated (they don't share any ancestor in
+	 * common, something that cannot happen in RDF-based ontologies, all concepts derive from 'Class'). If the two
+	 * concepts are the same, the distance is 0. If one is a parent of the other, the distance is 0.5 (nevermind the
+	 * distance). Otherwise the distance is 0.5 plus 0.1 for each level up until a common ancestor is found.
 	 */
 	public double distance(Object concept1, Object concept2) {
 		if (concept1 == null)

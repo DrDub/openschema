@@ -22,8 +22,7 @@
 package net.sf.openschema;
 
 /**
- * An implementation of the <tt>Ontology</tt> interface where each concept is in
- * a separate class.
+ * An implementation of the <tt>Ontology</tt> interface where each concept is in a separate class.
  * 
  * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
  */

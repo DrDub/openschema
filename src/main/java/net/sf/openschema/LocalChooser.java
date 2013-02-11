@@ -22,13 +22,13 @@
 package net.sf.openschema;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * Abstract class for deciding which continuation to follow in the schema
- * instantiation process.
+ * Abstract class for deciding which continuation to follow in the schema instantiation process.
  * 
  * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
  */
@@ -38,23 +38,36 @@ public abstract class LocalChooser {
 	 * Decide which continuation to follow in the schema instantiation process.
 	 */
 	public abstract Decision choose(List<Map<String, Object>> fds, List<Frame> defaultFoci, Object currentFocus,
-			List<Object> potentialFoci, List<Object> focusStack, FrameSet frames);
+			List<Frame> potentialFoci, List<Frame> focusStack, FrameSet frames);
 
 	/**
-	 * Extract a set of potential foci from a given clause. As the clauses store
-	 * only frame names but not the frame themselves, the FrameSet is used to do
-	 * that mapping.
+	 * Extract a set of potential foci from a given clause. As the clauses store only frame names but not the frame
+	 * themselves, the FrameSet is used to do that mapping.
 	 */
 	@SuppressWarnings("unchecked")
-	public Set<Frame> extractPotentialFoci(Map<String, Object> fd, FrameSet frames) {
-		Set<Frame> result = new HashSet<Frame>();
+	public List<Frame> extractPotentialFoci(Map<String, Object> fd, FrameSet frames) {
+		List<Frame> result = new LinkedList<Frame>();
+		Set<Frame> seen = new HashSet<Frame>();
 		for (Object value : fd.values()) {
-			if (value instanceof Map)
-				result.addAll(extractPotentialFoci((Map<String, Object>) value, frames));
-			else if (value instanceof Frame)
-				result.add((Frame) value);
-			else if (value != null && frames.getFrame(value.toString()) != null)
-				result.add(frames.getFrame(value.toString()));
+			if (value instanceof Map) {
+				for (Frame frame : extractPotentialFoci((Map<String, Object>) value, frames))
+					if (!seen.contains(frame)) {
+						result.add(frame);
+						seen.add(frame);
+					}
+			} else if (value instanceof Frame) {
+				Frame frame = (Frame) value;
+				if (!seen.contains(frame)) {
+					result.add(frame);
+					seen.add(frame);
+				}
+			} else if (value != null && frames.getFrame(value.toString()) != null) {
+				Frame frame = frames.getFrame(value.toString());
+				if (!seen.contains(frame)) {
+					result.add(frame);
+					seen.add(frame);
+				}
+			}
 		}
 		return result;
 	}
@@ -64,12 +77,21 @@ public abstract class LocalChooser {
 		/** Position in the original list. */
 		protected int pos;
 		/** New current focus. */
-		protected Object currentFocus;
+		protected Frame currentFocus;
 		/** New potential focus list. */
-		protected List<Object> potentialFoci;
+		protected List<Frame> potentialFoci;
 
-		/** Full constructor (this class is immutable). */
-		public Decision(int pos, Object currentFocus, List<Object> potentialFoci) {
+		/**
+		 * Full constructor (this class is immutable).
+		 * 
+		 * @param pos
+		 *            Position in the original list of the chosen continuation.
+		 * @param currentFocus
+		 *            New current focus.
+		 * @param potentialFoci
+		 *            New potential focus list.
+		 */
+		public Decision(int pos, Frame currentFocus, List<Frame> potentialFoci) {
 			this.pos = pos;
 			this.currentFocus = currentFocus;
 			this.potentialFoci = potentialFoci;
@@ -81,12 +103,12 @@ public abstract class LocalChooser {
 		}
 
 		/** New current focus. */
-		public Object getCurrentFocus() {
+		public Frame getCurrentFocus() {
 			return currentFocus;
 		}
 
 		/** New potential focus list. */
-		public List<Object> getPotentialFoci() {
+		public List<Frame> getPotentialFoci() {
 			return potentialFoci;
 		}
 	}

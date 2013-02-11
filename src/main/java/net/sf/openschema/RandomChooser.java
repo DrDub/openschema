@@ -21,7 +21,6 @@
 
 package net.sf.openschema;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,10 +34,10 @@ public class RandomChooser extends LocalChooser {
 	protected java.util.Random rnd = new java.util.Random();
 
 	public Decision choose(List<Map<String, Object>> fds, List<Frame> defaultFoci, Object currentFocus,
-			List<Object> potentialFoci, List<Object> focusStack, FrameSet frames) {
+			List<Frame> potentialFoci, List<Frame> focusStack, FrameSet frames) {
 		int pos = fds.size() == 0 ? 0 : rnd.nextInt(fds.size());
-		List<Object> newPotentialFoci = new ArrayList<Object>(extractPotentialFoci(fds.get(pos), frames));
-		Object focus = newPotentialFoci.size() == 0 ? defaultFoci.get(pos) : newPotentialFoci.get(rnd
+		List<Frame> newPotentialFoci = extractPotentialFoci(fds.get(pos), frames);
+		Frame focus = newPotentialFoci.size() == 0 ? defaultFoci.get(pos) : newPotentialFoci.get(rnd
 				.nextInt(newPotentialFoci.size()));
 		return new Decision(pos, focus, newPotentialFoci);
 	}

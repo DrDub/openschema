@@ -38,8 +38,7 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 /**
- * A filter stream that transform a list of triples in comma separated format
- * into RDF.
+ * A filter stream that transform a list of triples in comma separated format into RDF.
  * 
  * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
  */

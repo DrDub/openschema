@@ -35,8 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * A filter stream that takes schemas defined in the OpenSchema DSL and
- * transforms it to XML in the OpenSchema XSD.
+ * A filter stream that takes schemas defined in the OpenSchema DSL and transforms it to XML in the OpenSchema XSD.
  * 
  * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
  */
@@ -137,8 +136,7 @@ public class SchemaToXmlFilterStream extends FilterInputStream {
 		return currentLine;
 	}
 
-	private static final Pattern VAR_RE = Pattern
-			.compile("\\s*(req\\s+)?(def\\s+)?([^\\s]+)\\s*:\\s*([^\\s]+)\\s*");
+	private static final Pattern VAR_RE = Pattern.compile("\\s*(req\\s+)?(def\\s+)?([^\\s]+)\\s*:\\s*([^\\s]+)\\s*");
 
 	private static int parseInsideVar(final StringBuilder sb, int thrIndent, int currentLine, final List<String> text) {
 		String line = text.get(currentLine);

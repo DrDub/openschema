@@ -21,20 +21,23 @@
 
 package net.sf.openschema;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 /**
- * A greedy continuation chooser that always returns the first element of the
- * possible alternatives.
+ * A greedy continuation chooser that always returns the first element of the possible alternatives.
  * 
  * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
  */
 
 public class GreedyChooser extends LocalChooser {
+	private static final boolean verbose = true;
+
 	public Decision choose(List<Map<String, Object>> fds, List<Frame> defaultFoci, Object currentFocus,
-			List<Object> potentialFoci, List<Object> focusStack, FrameSet frames) {
-		return new Decision(0, defaultFoci.get(0), new ArrayList<Object>(extractPotentialFoci(fds.get(0), frames)));
+			List<Frame> potentialFoci, List<Frame> focusStack, FrameSet frames) {
+		if (verbose)
+			System.err.println("GreedyChooser called with fds==" + fds);
+
+		return new Decision(0, defaultFoci.get(0), extractPotentialFoci(fds.get(0), frames));
 	}
 }

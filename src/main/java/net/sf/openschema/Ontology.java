@@ -22,8 +22,7 @@
 package net.sf.openschema;
 
 /**
- * An interface encapsulating all the ontological needs of document structuring
- * schemata.
+ * An interface encapsulating all the ontological needs of document structuring schemata.
  * 
  * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
  */

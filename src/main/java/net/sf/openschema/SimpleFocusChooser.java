@@ -24,29 +24,24 @@ package net.sf.openschema;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
- * A <tt>LocalChooser</tt> that implements a simple set of focus heuristics
- * described in McKeown (1985).
+ * A <tt>LocalChooser</tt> that implements a simple set of focus heuristics described in McKeown (1985).
  * <p>
  * The heuristics are as follow:
  * 
  * <ul>
- * <li>Shift focus to a previously mentioned, not in focus object (an object
- * belonging to the previous <b>potential focus list</b>. The rationale is that
- * text is more interesting when it changes focus <i>and</i> if the focus is not
+ * <li>Shift focus to a previously mentioned, not in focus object (an object belonging to the previous <b>potential
+ * focus list</b>. The rationale is that text is more interesting when it changes focus <i>and</i> if the focus is not
  * changed at that moment the entity will need to be re-introduced later on.</li>
  * 
- * <li>Stay put with the current focus (to avoid giving the idea that a topic is
- * finished when it is not).</li>
+ * <li>Stay put with the current focus (to avoid giving the idea that a topic is finished when it is not).</li>
  * 
  * <li>Come back to a topic in the focus stack.</li>
  * </ul>
  * 
- * Moreover, the links between the potential focus lists of the previous clause
- * and the current one are also used as a factor to decide continuation. The
- * most links exist, the most cohesive the text is expected to be.
+ * Moreover, the links between the potential focus lists of the previous clause and the current one are also used as a
+ * factor to decide continuation. The most links exist, the most cohesive the text is expected to be.
  * 
  * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
  */
@@ -55,8 +50,7 @@ public class SimpleFocusChooser extends LocalChooser {
 	/** Verbosity flag, defaults to off. */
 	public static boolean verbose = false;
 	/**
-	 * Ontology, employed for the potential focus lists linking decision
-	 * process.
+	 * Ontology, employed for the potential focus lists linking decision process.
 	 */
 	protected Ontology ontology;
 
@@ -66,11 +60,10 @@ public class SimpleFocusChooser extends LocalChooser {
 	}
 
 	/**
-	 * Choose the appropriate continuation, using some of McKeown (1985)
-	 * strategies.
+	 * Choose the appropriate continuation, using some of McKeown (1985) strategies.
 	 */
 	public Decision choose(List<Map<String, Object>> fds, List<Frame> defaultFoci, Object currentFocus,
-			List<Object> potentialFoci, List<Object> focusStack, FrameSet frames) {
+			List<Frame> potentialFoci, List<Frame> focusStack, FrameSet frames) {
 		// first heuristic: choose a shift of focus, if possible
 		// CF(new) \in PFL(last)
 		List<Integer> candidatePositions = new ArrayList<Integer>();
@@ -151,23 +144,22 @@ public class SimpleFocusChooser extends LocalChooser {
 			return chooseOnPotentialToPotentialLinks(candidatePositions, candidateDefaultFoci, fds, potentialFoci,
 					frames);
 		// greedy
-		return new Decision(0, defaultFoci.get(0), new ArrayList<Object>(extractPotentialFoci(fds.get(0), frames)));
+		return new Decision(0, defaultFoci.get(0), extractPotentialFoci(fds.get(0), frames));
 	}
 
 	/**
-	 * Final decision on a smaller set of candidates using the potential to
-	 * potential links.
+	 * Final decision on a smaller set of candidates using the potential to potential links.
 	 */
 	protected Decision chooseOnPotentialToPotentialLinks(List<Integer> candidatePositions,
-			List<Frame> candidateDefaultFoci, List<Map<String, Object>> fds, List<Object> potentialFoci, FrameSet frames) {
+			List<Frame> candidateDefaultFoci, List<Map<String, Object>> fds, List<Frame> potentialFoci, FrameSet frames) {
 		int maxPos = 0;
 		double maxLinks = -1;
-		Object maxCurrentFocus = null;
-		List<Object> maxPotentialFoci = null;
+		Frame maxCurrentFocus = null;
+		List<Frame> maxPotentialFoci = null;
 		for (int c = 0; c < candidatePositions.size(); c++) {
 			int pos = candidatePositions.get(c).intValue();
 			double links = 0;
-			Set<Frame> pfl = extractPotentialFoci(fds.get(pos), frames);
+			List<Frame> pfl = extractPotentialFoci(fds.get(pos), frames);
 			for (Frame potentialFocus : pfl) {
 				double maxValue = 0;
 				Frame linkTo = null;
@@ -202,7 +194,7 @@ public class SimpleFocusChooser extends LocalChooser {
 				maxPos = pos;
 				maxLinks = links;
 				maxCurrentFocus = candidateDefaultFoci.get(c);
-				maxPotentialFoci = new ArrayList<Object>(pfl);
+				maxPotentialFoci = new ArrayList<Frame>(pfl);
 			}
 		}
 		return new Decision(maxPos, maxCurrentFocus, maxPotentialFoci);

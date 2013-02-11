@@ -25,8 +25,7 @@ import java.util.Set;
 import java.util.List;
 
 /**
- * Knowledge frames, part of the <tt>FrameSet</tt>, the input to the document
- * structuring schemata.
+ * Knowledge frames, part of the <tt>FrameSet</tt>, the input to the document structuring schemata.
  * 
  * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
  */
@@ -45,8 +44,7 @@ public interface Frame {
 	public void setID(String id);
 
 	/**
-	 * Access a value in the frame. Returns an EMPTY_LIST if the key is
-	 * undefined.
+	 * Access a value in the frame. Returns an EMPTY_LIST if the key is undefined.
 	 */
 	public List<Object> get(String key);
 

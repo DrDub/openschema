@@ -29,28 +29,25 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Properties to be checked among variables in the predicate. Properties should
- * be moved to a XML on a format on their own in the future. However, lot of
- * changes are foreseen here in the immediate future so it's easy to keep them
- * in the current format. Properties are a strings in the openschema xml
- * definition file (OpenSchema.xsd). The class <tt>Property</tt> is abstract and
- * contains a <tt>parse</tt> static method that will translate the string into a
- * tree of Property subclasses, defined with package access rights only.
+ * Properties to be checked among variables in the predicate. Properties should be moved to a XML on a format on their
+ * own in the future. However, lot of changes are foreseen here in the immediate future so it's easy to keep them in the
+ * current format. Properties are a strings in the openschema xml definition file (OpenSchema.xsd). The class
+ * <tt>Property</tt> is abstract and contains a <tt>parse</tt> static method that will translate the string into a tree
+ * of Property subclasses, defined with package access rights only.
  * 
  * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
  */
 
 public abstract class Property {
 	/**
-	 * Variables this property restricts. Should be used later on to implement
-	 * optimizations in the CSP code in OpenSchema.
+	 * Variables this property restricts. Should be used later on to implement optimizations in the CSP code in
+	 * OpenSchema.
 	 */
 	public abstract Set<String> variables();
 
 	/**
-	 * Check whether a map of variables to values verifies or not this property.
-	 * The ontology is employed for ontological properties, such as
-	 * "object-1 UNDER c-entity".
+	 * Check whether a map of variables to values verifies or not this property. The ontology is employed for
+	 * ontological properties, such as "object-1 UNDER c-entity".
 	 */
 	public abstract boolean check(Map<Object, Frame> vars, Ontology ontology);
 
@@ -73,9 +70,8 @@ public abstract class Property {
 	}
 
 	/**
-	 * Static parse method, this is the only way to create properties. The
-	 * possible variables are given as a Set (from the predicate variables
-	 * section) to tell variables from ground strings.
+	 * Static parse method, this is the only way to create properties. The possible variables are given as a Set (from
+	 * the predicate variables section) to tell variables from ground strings.
 	 */
 	public static Property parse(String s, Set<String> vars) {
 		String operator = null;

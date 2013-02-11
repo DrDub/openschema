@@ -23,9 +23,9 @@ package net.sf.openschema;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -40,44 +40,93 @@ import net.sf.jfuf.fd.AttributeValuePair;
 import org.xml.sax.InputSource;
 
 /**
- * Main OpenSchema class. The schema is created from an XML file. At
- * construction, the strategy for selecting local choices is also specified.
- * Once created, the schema is instantiated with a frameset and an ontology. The
- * result of an instantiated schema is a document plan.
+ * Main OpenSchema class. The schema is created from an XML file. At construction, the strategy for selecting local
+ * choices is also specified. Once created, the schema is instantiated with a frameset and an ontology. The result of an
+ * instantiated schema is a document plan.
  * 
  * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
  */
 
 public class OpenSchemaPlanner {
 	/** Verbosity flag, defaults to off. */
-	public static boolean verbose = false;
+	public static boolean verbose = true;
 	/**
-	 * Top-level node of the schema, here is where the instantiation starts. The
-	 * whole network is constructed from the XML in the build method.
+	 * Top-level node of the schema, here is where the instantiation starts. The whole network is constructed from the
+	 * XML in the build method.
 	 */
 	protected Node top;
 	/**
-	 * Definition of the rhetorical predicates. The keys are names (
-	 * <tt>String</tt>), the values are instances of the inner class
-	 * <tt>Predicate</tt>.
+	 * Definition of the rhetorical predicates. The keys are names ( <tt>String</tt>), the values are instances of the
+	 * inner class <tt>Predicate</tt>.
 	 */
 	protected Map<String, Predicate> predicates;
 	/**
-	 * LocalChooser, decides which node to continue the instantiation of the
-	 * schema.
+	 * LocalChooser, decides which node to continue the instantiation of the schema.
 	 */
 	protected LocalChooser chooser;
+
+	protected static Frame EMPTY_FOCUS = new Frame() {
+
+		@Override
+		public Object getType() {
+			return Boolean.TRUE;
+		}
+
+		@Override
+		public void setType(Object type) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public String getID() {
+			return "EMPTY_FOCUS";
+		}
+
+		@Override
+		public void setID(String id) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public List<Object> get(String key) {
+			return Collections.emptyList();
+		}
+
+		@Override
+		public void set(String key, Object value) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public void set(String key, List<Object> values) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public void add(String key, Object value) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public boolean containsKey(String key) {
+			return false;
+		}
+
+		@Override
+		public Set<String> keySet() {
+			return Collections.emptySet();
+		}
+
+	};
 
 	/**
 	 * Constructor from an SAX <tt>InputSource</tt>.
 	 * 
 	 * @param source
-	 *            A SAX <tt>InputSource</tt>, can read from a <tt>Reader</tt> or
-	 *            an <tt>InputStream</tt>.
+	 *            A SAX <tt>InputSource</tt>, can read from a <tt>Reader</tt> or an <tt>InputStream</tt>.
 	 * @param chooser
-	 *            An instance of the abstract class <tt>LocalChooser</tt>, it
-	 *            should select among the different continuation nodes during
-	 *            instantiation.
+	 *            An instance of the abstract class <tt>LocalChooser</tt>, it should select among the different
+	 *            continuation nodes during instantiation.
 	 */
 	public OpenSchemaPlanner(InputSource source, LocalChooser chooser) throws JAXBException {
 		JAXBContext context = JAXBContext.newInstance("net.sf.openschema:net.sf.jfuf.fd");
@@ -87,18 +136,16 @@ public class OpenSchemaPlanner {
 	}
 
 	/**
-	 * Main method, takes data to instantiate the schema, an initial variable
-	 * mapping and an ontology and returns a DocumentPlan.
+	 * Main method, takes data to instantiate the schema, an initial variable mapping and an ontology and returns a
+	 * DocumentPlan.
 	 * 
 	 * @param frames
-	 *            a class implementing the <tt>FrameSet</tt> interface, for
-	 *            example <tt>RDFFrameSet</tt> containing the data to fill the
-	 *            schema.
+	 *            a class implementing the <tt>FrameSet</tt> interface, for example <tt>RDFFrameSet</tt> containing the
+	 *            data to fill the schema.
 	 * @param initialMapping
 	 *            a mapping from variable names to values (<tt>Frame</tt>s).
 	 * @param ontology
-	 *            a class implementing the <tt>Ontology</tt> interface, for
-	 *            example <tt>RDFOntology</tt>.
+	 *            a class implementing the <tt>Ontology</tt> interface, for example <tt>RDFOntology</tt>.
 	 */
 	public DocumentPlan instantiate(FrameSet frames, Map<String, Frame> initialMapping, Ontology ontology) {
 		// initialize variables
@@ -106,9 +153,9 @@ public class OpenSchemaPlanner {
 
 		Cache cache = new Cache();
 		Map<String, Frame> varMapping = new HashMap<String, Frame>(initialMapping);
-		List<Object> focusHistory = new ArrayList<Object>();
-		Object currentFocus = initialMapping.size() == 0 ? Boolean.TRUE : initialMapping.values().iterator().next();
-		List<Object> potentialFoci = new ArrayList<Object>();
+		List<Frame> focusHistory = new ArrayList<Frame>();
+		Frame currentFocus = initialMapping.size() == 0 ? EMPTY_FOCUS : initialMapping.values().iterator().next();
+		List<Frame> potentialFoci = new ArrayList<Frame>();
 
 		// main cycle
 		Node currentNode = top;
@@ -117,22 +164,22 @@ public class OpenSchemaPlanner {
 				System.err.println("CURRENT NODE=" + currentNode);
 			// find which nodes are reachable from current node
 			List<DecoratedNode> confusionSet = computeConfusionSet(currentNode, varMapping, cache, ontology, frames);
-			if (verbose)
+			if (verbose) {
 				System.err.println("confusionSet.size()==" + confusionSet.size());
+				if (confusionSet.size() > 1)
+					System.err.println(confusionSet);
+			}
 			if (confusionSet.isEmpty()) {
 				currentNode = null;
 				break;
 			}
 
-			// transform the confusion set to something suitable for
-			// the chooser to process
+			// transform the confusion set to something suitable for the chooser to process
 			List<Map<String, Object>> fds = new ArrayList<Map<String, Object>>(confusionSet.size());
 			List<Frame> defaultFoci = new ArrayList<Frame>(confusionSet.size());
-			// extract the FDs and the default focus for the decorated
-			// nodes (nodes decorated with aggr. and par. boundaries)
-			Iterator<DecoratedNode> cs = confusionSet.iterator();
-			while (cs.hasNext()) {
-				DecoratedNode decoratedNode = cs.next();
+			// extract the FDs and the default focus for the decorated nodes (nodes decorated with aggr. and par.
+			// boundaries)
+			for (DecoratedNode decoratedNode : confusionSet) {
 				List<Map<Object, Frame>> values = cache.fetch(decoratedNode.getNode(), varMapping);
 				Map<Object, Frame> valueMapping = values.get(0);
 
@@ -165,8 +212,7 @@ public class OpenSchemaPlanner {
 			// add the clause
 			if (verbose)
 				System.err.println("Adding clause: " + clause);
-			// (focus info is recorded as it may be used by referring
-			// expression generators, etc.)
+			// (focus info is recorded as it may be used by referring expression generators, etc.)
 			clause.put("focus", ((Frame) currentFocus).getID());
 			List<Map<String, Object>> focusStack = new ArrayList<Map<String, Object>>();
 			for (int i = focusHistory.size() - 1; i >= 0; i--) {
@@ -189,12 +235,10 @@ public class OpenSchemaPlanner {
 	}
 
 	/**
-	 * Compute all the nodes that are reachable from current node without
-	 * passing through another Predicate node. The possible nodes should be able
-	 * to be instantiated, that is to say, there must be sets of values
-	 * satisfying the node's predicate properties in the cache. This method
-	 * invokes the <tt>canBeInstantiated</tt> method, that will fill the cache
-	 * the first time it is executed.
+	 * Compute all the nodes that are reachable from current node without passing through another Predicate node. The
+	 * possible nodes should be able to be instantiated, that is to say, there must be sets of values satisfying the
+	 * node's predicate properties in the cache. This method invokes the <tt>canBeInstantiated</tt> method, that will
+	 * fill the cache the first time it is executed.
 	 * 
 	 * @param node
 	 *            the current node to start the spanning tree.
@@ -206,8 +250,7 @@ public class OpenSchemaPlanner {
 	 *            used to update the cache.
 	 * @param frames
 	 *            used to update the cache.
-	 * @return a list of <tt>DecoratedNode</tt> that can be reached and
-	 *         instantiated from the current node.
+	 * @return a list of <tt>DecoratedNode</tt> that can be reached and instantiated from the current node.
 	 */
 	protected List<DecoratedNode> computeConfusionSet(Node node, Map<String, Frame> varMapping, Cache cache,
 			Ontology ontology, FrameSet frames) {
@@ -217,10 +260,9 @@ public class OpenSchemaPlanner {
 		List<DecoratedNode> boundaryNodes = new LinkedList<DecoratedNode>();
 		Set<DecoratedNode> seenNodes = new HashSet<DecoratedNode>();
 		List<DecoratedNode> newNodes = new ArrayList<DecoratedNode>();
-		newNodes.add(new DecoratedNode(node));
-		Iterator<Node> og = node.getOutgoing().iterator();
-		while (og.hasNext())
-			newNodes.add(new DecoratedNode(og.next()));
+		// newNodes.add(new DecoratedNode(node));
+		for (Node og : node.getOutgoing())
+			newNodes.add(new DecoratedNode(og));
 
 		while (!newNodes.isEmpty()) {
 			DecoratedNode currentNode = newNodes.remove(0);
@@ -236,32 +278,26 @@ public class OpenSchemaPlanner {
 			if (currentNode.getNode().isParBoundary())
 				isPar = true;
 			if (!currentNode.getNode().isPredicate()) {
-				Iterator<Node> o = currentNode.getNode().getOutgoing().iterator();
-				while (o.hasNext())
-					newNodes.add(new DecoratedNode(o.next(), isAggr, isPar));
+				for (Node o : currentNode.getNode().getOutgoing())
+					newNodes.add(new DecoratedNode(o, isAggr, isPar));
 			}
 		}
 		if (verbose)
 			System.err.println("Checking " + boundaryNodes.size() + "...");
 		// check whether they can be instantiated
-		Iterator<DecoratedNode> bn = boundaryNodes.iterator();
-		while (bn.hasNext()) {
-			DecoratedNode decoratedNode = bn.next();
+		for (DecoratedNode decoratedNode : boundaryNodes)
 			if (canBeInstantiated(decoratedNode.getNode(), varMapping, cache, ontology, frames))
 				result.add(decoratedNode);
-		}
 
 		return result;
 	}
 
 	/**
-	 * Check whether there is valid data to instantiate a node or not, given an
-	 * initial variable mapping. This function relies heavily in the cache, and
-	 * will populate it in case of cache miss.
+	 * Check whether there is valid data to instantiate a node or not, given an initial variable mapping. This function
+	 * relies heavily in the cache, and will populate it in case of cache miss.
 	 * 
 	 * @param node
-	 *            the current node, to analyze the predicate and global-to-local
-	 *            variable mapping.
+	 *            the current node, to analyze the predicate and global-to-local variable mapping.
 	 * @param varMapping
 	 *            the global variables.
 	 * @param cache
@@ -286,18 +322,15 @@ public class OpenSchemaPlanner {
 	}
 
 	/**
-	 * Search for values that satisfy the node properties and the given mapping
-	 * of variables.
+	 * Search for values that satisfy the node properties and the given mapping of variables.
 	 * 
 	 * @param node
-	 *            the schema node, containing the properties that the values
-	 *            should satisfy and the mapping between local and global
-	 *            variables.
+	 *            the schema node, containing the properties that the values should satisfy and the mapping between
+	 *            local and global variables.
 	 * @param varMapping
 	 *            global variables, mapping from name to value.
 	 * @param ontology
-	 *            the ontology, employed to restrict the search over values of a
-	 *            certain type.
+	 *            the ontology, employed to restrict the search over values of a certain type.
 	 * @param frames
 	 *            the set of frames over where to perform the search.
 	 * @return List of associations of local variables to values.
@@ -324,6 +357,8 @@ public class OpenSchemaPlanner {
 				allVars.put(predVar, Collections.singletonList(varMapping.get(globalVar)));
 		}
 		// or all the values of the target type, otherwise
+		if (node.getPredicate() == null)
+			System.out.println(node);
 		Map<String, String> predVars = node.getPredicate().getVars();
 		for (Map.Entry<String, String> entry : predVars.entrySet()) {
 			Object predVar = entry.getKey();
@@ -331,16 +366,15 @@ public class OpenSchemaPlanner {
 			List<Frame> l = framesUnderType(type, ontology, frames);
 			if (verbose) {
 				System.err.println("Frames under '" + type + "'");
-				Iterator<Frame> ll = l.iterator();
-				while (ll.hasNext())
-					System.err.println("\t" + ll.next().getID());
+				for (Frame ff : l)
+					System.err.println("\t" + ff.getID());
 			}
 			if (!allVars.containsKey(predVar))
 				allVars.put(predVar, framesUnderType(type, ontology, frames));
 		}
 		// now check the predicates over the set multiplication of all
 		// sets on the variable mappings and filter the ones who
-		// satistfy the properties
+		// satisfy the properties
 		long allSets = 1;
 		Object[] varOrder = allVars.keySet().toArray();
 		int[] allVarSize = new int[varOrder.length];
@@ -375,9 +409,7 @@ public class OpenSchemaPlanner {
 
 			// now see if it checks
 			failedProperties.clear();
-			Iterator<Property> p = node.getPredicate().getProperties().iterator();
-			while (p.hasNext()) {
-				Property property = p.next();
+			for (Property property : node.getPredicate().getProperties()) {
 				if (verbose) {
 					System.err.println("Checking property: " + property);
 					for (Map.Entry<Object, Frame> entry : currentAssignment.entrySet())
@@ -396,35 +428,57 @@ public class OpenSchemaPlanner {
 			} else {
 				currentSet++;
 				/*
-				 * // look for the failed property that will advance more //
-				 * positions Property pickedProperty=null; long toAdvance=0;
-				 * Iterator fp=failedProperties.iterator(); while(fp.hasNext()){
-				 * Property property=(Property)fp.next(); long thisToAdvance=1;
-				 * Set propertyVariables=property.variables(); for(int
-				 * i=0;i<varOrder.length;i++)
-				 * if(!propertyVariables.contains(varOrder[i]))
-				 * thisToAdvance=thisToAdvance*(long)allVarSize[i];
-				 * if(thisToAdvance>toAdvance) pickedProperty=property; } // now
-				 * advance all the positions that can be done with // this
-				 * ordering Set freeVariables=new HashSet(allVars.keySet());
-				 * freeVariables.removeAll(pickedProperty.variables()); for(int
-				 * i=0;i<varOrder.length;i++)
-				 * isFree[i]=freeVariables.contains(varOrder[i]); boolean
-				 * allFree=true; long newCurrent=currentSet; do{ newCurrent++;
-				 * long leftOver3=currentSet; for(int
-				 * i=varOrder.length-1;i>=0;i--){ int pos=(int)
-				 * (leftOver3%allVarSize[i]); leftOver3=leftOver3/allVarSize[i];
-				 * if(pos!=currentPos[i]&&!isFree[i]) allFree=false; }
+				 * // look for the failed property that will advance more // positions Property pickedProperty=null;
+				 * long toAdvance=0; Iterator fp=failedProperties.iterator(); while(fp.hasNext()){ Property
+				 * property=(Property)fp.next(); long thisToAdvance=1; Set propertyVariables=property.variables();
+				 * for(int i=0;i<varOrder.length;i++) if(!propertyVariables.contains(varOrder[i]))
+				 * thisToAdvance=thisToAdvance*(long)allVarSize[i]; if(thisToAdvance>toAdvance) pickedProperty=property;
+				 * } // now advance all the positions that can be done with // this ordering Set freeVariables=new
+				 * HashSet(allVars.keySet()); freeVariables.removeAll(pickedProperty.variables()); for(int
+				 * i=0;i<varOrder.length;i++) isFree[i]=freeVariables.contains(varOrder[i]); boolean allFree=true; long
+				 * newCurrent=currentSet; do{ newCurrent++; long leftOver3=currentSet; for(int
+				 * i=varOrder.length-1;i>=0;i--){ int pos=(int) (leftOver3%allVarSize[i]);
+				 * leftOver3=leftOver3/allVarSize[i]; if(pos!=currentPos[i]&&!isFree[i]) allFree=false; }
 				 * }while(allFree&&newCurrent<allSets); currentSet=newCurrent;
 				 */
 			}
 		}
+		// order the associations somehow (alphabetically by now
+
+		Collections.sort(result, new Comparator<Map<Object, Frame>>() {
+
+			private Map<Integer, String> cache = new HashMap<Integer, String>();
+
+			private String mapToString(Map<Object, Frame> m) {
+				int hash = System.identityHashCode(m);
+				if (cache.containsKey(m))
+					return cache.get(m);
+				List<Object> allKeys = new ArrayList<Object>(m.keySet());
+				Collections.sort(allKeys, new Comparator<Object>() {
+					@Override
+					public int compare(Object o1, Object o2) {
+						return o1.toString().compareTo(o2.toString());
+					}
+				});
+				StringBuilder sb = new StringBuilder();
+				for (Object k : allKeys)
+					sb.append(k).append('=').append(m.get(k).getID()).append(';');
+				String result = sb.toString();
+				cache.put(hash, result);
+				return result;
+			}
+
+			@Override
+			public int compare(Map<Object, Frame> o1, Map<Object, Frame> o2) {
+				return mapToString(o1).compareTo(mapToString(o2));
+			}
+		});
+
 		return result;
 	}
 
 	/**
-	 * Retrieve all the frames in a <tt>FrameSet</tt> which type is a subtype of
-	 * a given type.
+	 * Retrieve all the frames in a <tt>FrameSet</tt> which type is a subtype of a given type.
 	 * 
 	 * @param type
 	 *            the parent type.
@@ -436,18 +490,16 @@ public class OpenSchemaPlanner {
 	 */
 	protected static List<Frame> framesUnderType(Object type, Ontology ontology, FrameSet frames) {
 		List<Frame> result = new ArrayList<Frame>();
-		Iterator<Frame> s = frames.getFrames().iterator();
-		while (s.hasNext()) {
-			Frame frame = s.next();
+		for (Frame frame : frames.getFrames())
 			if (ontology.isA(frame.getType(), type))
 				result.add(frame);
-		}
+
 		return result;
 	}
 
 	/**
-	 * Instantiate a predicate by fetching the values from the cache and
-	 * resolving variables in the output FD of the predicate.
+	 * Instantiate a predicate by fetching the values from the cache and resolving variables in the output FD of the
+	 * predicate.
 	 * 
 	 * @param node
 	 *            the node being instantiated.
@@ -477,8 +529,8 @@ public class OpenSchemaPlanner {
 	}
 
 	/**
-	 * Instantiate a given FD by changing all the variable references via a
-	 * provided variable mapping. Recursive function.
+	 * Instantiate a given FD by changing all the variable references via a provided variable mapping. Recursive
+	 * function.
 	 * 
 	 * @param fd
 	 *            the functional description to operate on.
@@ -501,14 +553,11 @@ public class OpenSchemaPlanner {
 					String[] path = ((PathRef) value).getPath();
 					for (int i = 0; i < path.length; i++) {
 						// iterate over current frames
-						Iterator<Object> l = list.iterator();
-						// reuse list for the next iteration
-						list = new ArrayList<Object>();
-						while (l.hasNext()) {
-							Object o = l.next();
+						List<Object> list2 = new ArrayList<Object>();
+						for (Object o : list)
 							if (o instanceof Frame)
-								list.addAll(((Frame) o).get(path[i]));
-						}
+								list2.addAll(((Frame) o).get(path[i]));
+						list = list2;
 					}
 					if (list.size() == 0)
 						value = null;
@@ -557,14 +606,14 @@ public class OpenSchemaPlanner {
 			predicates.put(predicate.getID(), new Predicate(id, defaultFocus, vars, requiredVars, properties, output));
 		}
 		// now build the state machine
-		this.top = new Node();
-		Node exitNode = new Node();
+		this.top = new Node("top-");
+		Node exitNode = new Node("exit-");
 		build(top, exitNode, schema.getSchema().getNode(), false);
 	}
 
 	/**
-	 * Create a functional description from the JAXB code. All defined variables
-	 * are changed for <tt>VarRef</tt> or <tt>PathRef</tt>, accordingly.
+	 * Create a functional description from the JAXB code. All defined variables are changed for <tt>VarRef</tt> or
+	 * <tt>PathRef</tt>, accordingly.
 	 * 
 	 * @param vs
 	 *            the JAXB instances being processed.
@@ -598,10 +647,9 @@ public class OpenSchemaPlanner {
 	}
 
 	/**
-	 * Construct the network for a given construction in the schema language.
-	 * Most constructions can be taken as a sequence with an input node and an
-	 * output node, but the choices. A flag signals whether to construct a
-	 * choice or otherwise.
+	 * Construct the network for a given construction in the schema language. Most constructions can be taken as a
+	 * sequence with an input node and an output node, but the choices. A flag signals whether to construct a choice or
+	 * otherwise.
 	 * 
 	 * @param inNode
 	 *            the input to this subnetwork.
@@ -610,14 +658,11 @@ public class OpenSchemaPlanner {
 	 * @param schemaNodes
 	 *            the JAXB instances for this construction.
 	 * @param isChoice
-	 *            whether to link each node one after the other or all from
-	 *            inNode to outNode.
+	 *            whether to link each node one after the other or all from inNode to outNode.
 	 */
 	protected void build(Node inNode, Node outNode, List<SchemaNode.Node> schemaNodes, boolean isChoice) {
-		Iterator<net.sf.openschema.SchemaNode.Node> n = schemaNodes.iterator();
 		Node previous = inNode;
-		while (n.hasNext()) {
-			SchemaNode.Node node = n.next();
+		for (SchemaNode.Node node : schemaNodes) {
 			Node current = null;
 			// resolve according to node type. Most likely recurse.
 			if (node.getPredicate() != null) {
@@ -629,34 +674,39 @@ public class OpenSchemaPlanner {
 				current = new Node(predicates.get(predicate.getName()), vars);
 				previous.linkTo(current);
 			} else if (node.getAggrBoundary() != null) {
-				current = new Node(AGGRBOUNDARY_NODE);
+				current = new Node(AGGRBOUNDARY_NODE, "aggr-");
 				previous.linkTo(current);
 			} else if (node.getParBoundary() != null) {
-				current = new Node(PARBOUNDARY_NODE);
+				current = new Node(PARBOUNDARY_NODE, "par-");
 				previous.linkTo(current);
 			} else if (node.getSequence() != null || node.getOptional() != null || node.getKleeneStar() != null
 					|| node.getKleenePlus() != null) {
-				current = new Node();
-				build(previous,
-						current,
-						(node.getSequence() != null ? node.getSequence().getNode()
-								: (node.getKleeneStar() != null ? node.getKleeneStar().getNode() : (node
-										.getKleenePlus() != null ? node.getKleenePlus().getNode() : node.getOptional()
-										.getNode()))), false);
+				current = new Node("recurse-");
+				List<SchemaNode.Node> recurse = null;
+				if (node.getSequence() != null)
+					recurse = node.getSequence().getNode();
+				else if (node.getKleeneStar() != null)
+					recurse = node.getKleeneStar().getNode();
+				else if (node.getKleenePlus() != null)
+					recurse = node.getKleenePlus().getNode();
+				else
+					recurse = node.getOptional().getNode();
+
+				build(previous, current, recurse, false);
 				if (node.getKleeneStar() != null || node.getKleenePlus() != null)
 					current.linkTo(previous);
 				if (node.getKleeneStar() != null || node.getOptional() != null)
 					previous.linkTo(current);
 			} else if (node.getChoice() != null) {
-				current = new Node();
+				current = new Node("option-");
 				build(previous, current, node.getChoice().getNode(), true);
 			} else {
-				current = new Node();
+				current = new Node("other-");
 			}
 			if (!isChoice) {
-				// create a buffer between each element of the
-				// sequence to avoid far-reaching backward jumps
-				Node sequence = new Node();
+				// create a buffer between each element of the sequence to avoid
+				// far-reaching backward jumps
+				Node sequence = new Node("extra-");
 				current.linkTo(sequence);
 				previous = sequence;
 			} else
@@ -668,29 +718,51 @@ public class OpenSchemaPlanner {
 
 	/** Show the network (for debugging purposes) */
 	public String dump() {
-		StringBuffer result = new StringBuffer();
-		dump(result, top, new HashSet<Node>());
+		return dump(false);
+	}
+
+	/** Show the network (for debugging purposes) */
+	public String dump(boolean asDot) {
+		StringBuilder result = new StringBuilder();
+		if (asDot)
+			result.append("digraph schema {\n");
+
+		dump(result, top, new HashSet<Node>(), asDot);
+		if (asDot)
+			result.append("}\n");
 		return result.toString();
 	}
 
 	/** Recursive method for dump. */
-	protected void dump(StringBuffer dump, Node current, Set<Node> seen) {
+	protected void dump(StringBuilder dump, Node current, Set<Node> seen, boolean asDot) {
 		if (seen.contains(current))
 			return;
 		seen.add(current);
-		dump.append(current.toString());
-		dump.append("\n");
-		dump.append("connects to:\n");
-		List<Node> outGoing = current.getOutgoing();
-		Iterator<Node> og = outGoing.iterator();
-		while (og.hasNext()) {
-			dump.append("\t");
-			dump.append(og.next());
+		if (asDot) {
+			dump.append("\tn_").append(current.name.replaceAll("-", "_")).append(" [label=\"");
+			if (current.type == EMPTY_NODE)
+				dump.append(current.name).append("\", shape=ellipse");
+			else
+				dump.append(current).append("\", shape=box");
+			dump.append("];\n");
+		} else {
+			dump.append(current.toString());
 			dump.append("\n");
+			dump.append("connects to:\n");
 		}
-		Iterator<Node> n = outGoing.iterator();
-		while (n.hasNext())
-			dump(dump, n.next(), seen);
+		List<Node> outGoing = current.getOutgoing();
+		for (Node og : outGoing) {
+			if (asDot)
+				dump.append("\tn_").append(current.name.replaceAll("-", "_")).append("->n_")
+						.append(og.name.replaceAll("-", "_")).append(";\n");
+			else {
+				dump.append("\t");
+				dump.append(og);
+				dump.append("\n");
+			}
+		}
+		for (Node n : outGoing)
+			dump(dump, n, seen, asDot);
 	}
 
 	/** Predicate inner class */
@@ -732,8 +804,7 @@ public class OpenSchemaPlanner {
 		}
 
 		/**
-		 * Accessor to the FD to be used as clause, after changing the variables
-		 * to actual values.
+		 * Accessor to the FD to be used as clause, after changing the variables to actual values.
 		 */
 		public Map<String, Object> getOutput() {
 			return this.output;
@@ -754,8 +825,7 @@ public class OpenSchemaPlanner {
 	/** Empty node, only used for structural purposes. */
 	protected static final int EMPTY_NODE = 0;
 	/**
-	 * Predicate node, contains a predicate reference plus global-to-local
-	 * mapping.
+	 * Predicate node, contains a predicate reference plus global-to-local mapping.
 	 */
 	protected static final int PREDICATE_NODE = 1;
 	/** Aggregation boundary node. */
@@ -763,10 +833,15 @@ public class OpenSchemaPlanner {
 	/** Paragraph boundary node. */
 	protected static final int PARBOUNDARY_NODE = 3;
 
+	private static int nodeCounter = 0;
+
 	/** Node inner class. */
 	protected class Node {
+
 		/** Type of the node (EMPTY_NODE, PREDICATE_NODE, etc.). */
 		public int type;
+		/** Name, for debugging purposes */
+		public String name;
 		/** Nodes that can be accessed from the current one. */
 		public List<Node> outgoing;
 		/** Predicate held by this node (if any). */
@@ -779,12 +854,23 @@ public class OpenSchemaPlanner {
 			this(EMPTY_NODE);
 		}
 
+		/** Create an EMPTY_NODE. */
+		public Node(String name) {
+			this(EMPTY_NODE, name);
+		}
+
 		/** Create a node of a given type. */
 		public Node(int type) {
+			this(type, "");
+		}
+
+		/** Create a node of a given type. */
+		public Node(int type, String name) {
 			this.type = type;
 			this.outgoing = new LinkedList<Node>();
 			this.predicate = null;
 			this.vars = null;
+			this.name = name + String.valueOf(nodeCounter++);
 		}
 
 		/** Create a PREDICATE_NODE. */
@@ -839,7 +925,7 @@ public class OpenSchemaPlanner {
 		/** String rendering (for debugging purposes). */
 		public String toString() {
 			return "Node@"
-					+ Integer.toHexString(super.hashCode())
+					+ name
 					+ "["
 					+ (type == PREDICATE_NODE ? "PRED" : (type == AGGRBOUNDARY_NODE ? "AGGR"
 							: (type == PARBOUNDARY_NODE ? "PAR" : (type == EMPTY_NODE ? "EMPTY" : "?")))) + "/"
@@ -874,16 +960,14 @@ public class OpenSchemaPlanner {
 		}
 
 		/**
-		 * Whether or not the path to get to the decorated node crossed an
-		 * aggregation boundary.
+		 * Whether or not the path to get to the decorated node crossed an aggregation boundary.
 		 */
 		public boolean isAggrBoundary() {
 			return aggrBoundary;
 		}
 
 		/**
-		 * Whether or not the path to get to the decorated node crossed a
-		 * paragraph boundary.
+		 * Whether or not the path to get to the decorated node crossed a paragraph boundary.
 		 */
 		public boolean isParBoundary() {
 			return parBoundary;
@@ -969,22 +1053,19 @@ public class OpenSchemaPlanner {
 		}
 
 		/**
-		 * Access the cache by searching for the list of values for this node
-		 * and variables. Returns null on miss.
+		 * Access the cache by searching for the list of values for this node and variables. Returns null on miss.
 		 */
 		public List<Map<Object, Frame>> fetch(Node node, Map<String, Frame> vars) {
 			if (!cache.containsKey(node))
 				cache.put(node, new LinkedList<Entry>());
 			List<Entry> entries = cache.get(node);
-			Iterator<Entry> e = entries.iterator();
 			Entry theEntry = null;
-			while (e.hasNext()) {
-				Entry entry = e.next();
+			for (Entry entry : entries)
 				if (entry.equals(node, vars)) {
 					theEntry = entry;
 					break;
 				}
-			}
+
 			if (theEntry == null) {
 				theEntry = new Entry(node, vars);
 				entries.add(theEntry);

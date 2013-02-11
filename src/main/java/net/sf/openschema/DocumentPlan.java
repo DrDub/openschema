@@ -26,9 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A document plan, the output of document structuring schemata. In this case, a
- * document plan is a list of paragraph. Each paragraph is a list of aggregation
- * segments. Each aggregation segment is a list of clauses.
+ * A document plan, the output of document structuring schemata. In this case, a document plan is a list of paragraph.
+ * Each paragraph is a list of aggregation segments. Each aggregation segment is a list of clauses.
  * 
  * @author Pablo Ariel Duboue (pablo.duboue@gmail.com)
  */
@@ -53,9 +52,8 @@ public class DocumentPlan {
 	}
 
 	/**
-	 * Closes the current aggregation segment (deletes it if it's empty), closes
-	 * the current paragraph and creates a new paragraph with a new aggregation
-	 * segment inside.
+	 * Closes the current aggregation segment (deletes it if it's empty), closes the current paragraph and creates a new
+	 * paragraph with a new aggregation segment inside.
 	 */
 	public void addParBoundary() {
 		List<List<Map<String, Object>>> lastPar = paragraphs.get(paragraphs.size() - 1);

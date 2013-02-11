@@ -43,18 +43,16 @@ import net.sf.openschema.util.SchemaToXmlFilterStream;
 import org.xml.sax.InputSource;
 
 /**
- * Sample template system. Takes as input and schema and an RDF files and
- * produce as output text. In the schema predicates, the FDs have to be flat,
- * have a "template" entry with running text. Each variable of the form @name.
- * should have a "name" entry in the FD with the value that will be inserted at
- * that position.
+ * Sample template system. Takes as input and schema and an RDF files and produce as output text. In the schema
+ * predicates, the FDs have to be flat, have a "template" entry with running text. Each variable of the form @name.
+ * should have a "name" entry in the FD with the value that will be inserted at that position.
  * 
  * @author Pablo Ariel Duboue <pablo.duboue@gmail.com>
  */
 
 public class TemplateSystem {
 	/** Verbosity flag, defaults to off. */
-	public static boolean verbose = false;
+	public static boolean verbose = true;
 
 	/** Main. */
 	public static void main(String[] args) throws Exception {
@@ -79,7 +77,7 @@ public class TemplateSystem {
 		// new GreedyChooser());
 		if (verbose) {
 			System.err.println("Loaded.");
-			System.err.println(schema.dump());
+			System.err.println(schema.dump(true));
 			System.err.print("Loading frames... ");
 		}
 		InputStream framesIS = new FileInputStream(args[1]);

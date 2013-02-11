@@ -41,8 +41,8 @@ public class MapFrame extends HashMap<String, Object> implements Frame {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Construct a frame with a given id and type. The id is stored in the map
-	 * as the value for the key "#ID", while the type for the key "#TYPE".
+	 * Construct a frame with a given id and type. The id is stored in the map as the value for the key "#ID", while the
+	 * type for the key "#TYPE".
 	 */
 	public MapFrame(String id, Object type) {
 		super();
@@ -71,8 +71,7 @@ public class MapFrame extends HashMap<String, Object> implements Frame {
 	}
 
 	/**
-	 * Access a value in the frame. Returns an EMPTY_LIST if the key is
-	 * undefined.
+	 * Access a value in the frame. Returns an EMPTY_LIST if the key is undefined.
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Object> get(String key) {
