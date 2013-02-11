@@ -413,7 +413,8 @@ public class OpenSchemaPlanner {
 				if (verbose) {
 					System.err.println("Checking property: " + property);
 					for (Map.Entry<Object, Frame> entry : currentAssignment.entrySet())
-						System.err.println("\t" + entry.getKey() + "=" + ((Frame) entry.getValue()).getID());
+						System.err.println("\t" + entry.getKey() + "="
+								+ (entry.getValue() == null ? "null" : ((Frame) entry.getValue()).getID()));
 				}
 				if (!property.check(currentAssignment, ontology)) {
 					failedProperties.add(property);
