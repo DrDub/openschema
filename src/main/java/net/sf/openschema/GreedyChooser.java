@@ -31,7 +31,7 @@ import java.util.Map;
  */
 
 public class GreedyChooser extends LocalChooser {
-	private static final boolean verbose = true;
+	private static final boolean verbose = false;
 
 	public Decision choose(List<Map<String, Object>> fds, List<Frame> defaultFoci, Object currentFocus,
 			List<Frame> potentialFoci, List<Frame> focusStack, FrameSet frames) {

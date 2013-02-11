@@ -32,11 +32,11 @@ import java.util.Map;
 import net.sf.openschema.DocumentPlan;
 import net.sf.openschema.Frame;
 import net.sf.openschema.FrameSet;
+import net.sf.openschema.GreedyChooser;
 import net.sf.openschema.Ontology;
 import net.sf.openschema.OpenSchemaPlanner;
 import net.sf.openschema.RDFFrameSet;
 import net.sf.openschema.RDFOntology;
-import net.sf.openschema.SimpleFocusChooser;
 import net.sf.openschema.util.CsvToRdfFilterStream;
 import net.sf.openschema.util.SchemaToXmlFilterStream;
 
@@ -52,7 +52,7 @@ import org.xml.sax.InputSource;
 
 public class TemplateSystem {
 	/** Verbosity flag, defaults to off. */
-	public static boolean verbose = true;
+	public static boolean verbose = false;
 
 	/** Main. */
 	public static void main(String[] args) throws Exception {
@@ -72,9 +72,10 @@ public class TemplateSystem {
 		InputSource inputSource = new InputSource(new InputStreamReader(schemaIS));
 		if (verbose)
 			System.err.print("Loading schema... ");
-		OpenSchemaPlanner schema = new OpenSchemaPlanner(inputSource, new SimpleFocusChooser(ontology));
+		OpenSchemaPlanner schema = new OpenSchemaPlanner(inputSource, 
+				//new SimpleFocusChooser(ontology));
 		// new RandomChooser());
-		// new GreedyChooser());
+		new GreedyChooser());
 		if (verbose) {
 			System.err.println("Loaded.");
 			System.err.println(schema.dump(true));

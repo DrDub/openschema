@@ -49,7 +49,7 @@ import org.xml.sax.InputSource;
 
 public class OpenSchemaPlanner {
 	/** Verbosity flag, defaults to off. */
-	public static boolean verbose = true;
+	public static boolean verbose = false;
 	/**
 	 * Top-level node of the schema, here is where the instantiation starts. The whole network is constructed from the
 	 * XML in the build method.
