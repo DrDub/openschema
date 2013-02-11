@@ -280,7 +280,7 @@ public class SchemaToXmlFilterStream extends FilterInputStream {
 				String predicate = parts[0].trim();
 				String variableBindings = parts.length > 1 ? parts[1].replace(")", "") : null;
 				sb.append("<Node><Predicate Name=\"" + predicate + "\">\n");
-				if (variableBindings != null) {
+				if (variableBindings != null && !variableBindings.trim().isEmpty()) {
 					String[] varBindPairs = variableBindings.split(",");
 					for (String varBindPair : varBindPairs) {
 						String[] varBinding = varBindPair.split("\\|");
