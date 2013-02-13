@@ -33,6 +33,6 @@ public interface FrameSet {
 	/** Get all the frames. */
 	public Collection<Frame> getFrames();
 
-	/** Get a frame with a given name. */
+	/** Get a frame with a given name or null if is undefined. */
 	public Frame getFrame(String id);
 }
