@@ -33,10 +33,13 @@ import net.sf.openschema.DocumentPlan;
 import net.sf.openschema.Frame;
 import net.sf.openschema.FrameSet;
 import net.sf.openschema.GreedyChooser;
+import net.sf.openschema.LocalChooser;
 import net.sf.openschema.Ontology;
 import net.sf.openschema.OpenSchemaPlanner;
 import net.sf.openschema.RDFFrameSet;
 import net.sf.openschema.RDFOntology;
+import net.sf.openschema.RandomChooser;
+import net.sf.openschema.SimpleFocusChooser;
 import net.sf.openschema.util.CsvToRdfFilterStream;
 import net.sf.openschema.util.SchemaToXmlFilterStream;
 
@@ -58,7 +61,7 @@ public class TemplateSystem {
 	public static void main(String[] args) throws Exception {
 		if (args.length < 2) {
 			System.err
-					.println("Usage: TemplateSystem schema.(xml|schema) data.(rdf|csv) ontology.rdfs attribute value attribute value ...");
+					.println("Usage: TemplateSystem schema.(xml|schema) data.(rdf|csv) ontology.rdfs (simple|random|greedy) attribute value attribute value ...");
 			System.exit(0);
 		}
 		if (verbose)
@@ -72,10 +75,16 @@ public class TemplateSystem {
 		InputSource inputSource = new InputSource(new InputStreamReader(schemaIS));
 		if (verbose)
 			System.err.print("Loading schema... ");
-		OpenSchemaPlanner schema = new OpenSchemaPlanner(inputSource, 
-				//new SimpleFocusChooser(ontology));
-		// new RandomChooser());
-		new GreedyChooser());
+
+		LocalChooser chooser = new GreedyChooser();
+
+		if (args[3].equalsIgnoreCase("simple") || args[3].equalsIgnoreCase("simplefocuschooser")
+				|| args[3].equalsIgnoreCase("focus") || args[3].equalsIgnoreCase("simplefocus"))
+			chooser = new SimpleFocusChooser(ontology);
+		else if (args[3].equalsIgnoreCase("random") || args[3].equalsIgnoreCase("randomchooser"))
+			chooser = new RandomChooser();
+
+		OpenSchemaPlanner schema = new OpenSchemaPlanner(inputSource, chooser);
 		if (verbose) {
 			System.err.println("Loaded.");
 			System.err.println(schema.dump(true));
@@ -91,7 +100,7 @@ public class TemplateSystem {
 				System.err.println(frame.getID() + " " + frame.getType());
 		}
 		Map<String, Frame> varMapping = new HashMap<String, Frame>();
-		for (int i = 3; i < args.length; i += 2)
+		for (int i = 4; i < args.length; i += 2)
 			if (frames.getFrame(args[i + 1]) == null) {
 				System.err.println("Argument: '" + args[i] + "', value: '" + args[i + 1] + "' not found.");
 				System.exit(1);

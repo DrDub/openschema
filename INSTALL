@@ -13,7 +13,7 @@ To run the examples do
   
 and then in the top folder do
 
-  java -jar target/openschema-jar-with-dependencies.jar ./samples/template-biography.schema ./samples/sean.csv ./samples/ontology.rdfs self person-1
+  java -jar target/openschema-jar-with-dependencies.jar ./samples/template-biography.schema ./samples/sean.csv ./samples/ontology.rdfs greedy self person-1
 
 will produce
 
@@ -27,7 +27,7 @@ The c-grandson-relative of Sean Connery is  Quinn Connery. The c-brother-relativ
 
 and also
 
-  java -jar target/openschema-jar-with-dependencies.jar ./samples/attributive.xml ./samples/attributive-ex.rdf ./samples/ontology.rdfs object object-1
+  java -jar target/openschema-jar-with-dependencies.jar ./samples/attributive.xml ./samples/attributive-ex.rdf ./samples/ontology.rdfs greedy object object-1
 
 to obtain
 
